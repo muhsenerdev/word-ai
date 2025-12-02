@@ -22,6 +22,14 @@
   </properties>
 
   <dependencies>
+<dependency>
+      <artifactId>commons-jpa</artifactId>
+      <groupId>com.github.muhsenerdev</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>liquibase-core</artifactId>
+      <groupId>org.liquibase</groupId>
+    </dependency>
 
   </dependencies>
 
