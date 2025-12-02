@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="001.1-create-users-table" author="muhsenerdev">
+        <comment>Creates users table</comment>
+        <createTable tableName="users">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+
+            <!-- Audit Columns -->
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_by" type="varchar(255)"></column>
+            <column name="updated_by" type="varchar(255)"></column>
+
+            <!-- Soft Delete Column -->
+            <column name="deleted_at" type="TIMESTAMP">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001.2-put-unique-index-for-username-when-not-deleted" author="muhsenerdev">
+        <comment>Creates partial unique index for username when not deleted</comment>
+        <sql> CREATE UNIQUE INDEX IF NOT EXISTS idx_u_users_username_not_deleted ON users (username)
+            WHERE deleted_at IS NULL; </sql>
+
+        <rollback>
+            <sql> DROP INDEX IF EXISTS idx_u_users_username_not_deleted; </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
