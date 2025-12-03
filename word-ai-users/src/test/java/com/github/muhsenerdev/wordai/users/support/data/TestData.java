@@ -15,7 +15,7 @@ public class TestData {
     private static final Faker FAKER = new Faker();
 
     public static Username username() {
-        return Username.of(FAKER.name().username() + UUID.randomUUID().toString().substring(5));
+        return Username.of(FAKER.name().username());
     }
 
     public static RoleName randomRoleName() {
