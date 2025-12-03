@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import com.github.muhsenerdev.commons.jpa.Username;
 import com.github.muhsenerdev.wordai.users.domain.HashedPassword;
 import com.github.muhsenerdev.wordai.users.domain.HashedPasswordTestBuilder;
+import com.github.muhsenerdev.wordai.users.domain.PasswordTestBuilder;
+import com.github.muhsenerdev.wordai.users.domain.RawPassword;
 
 public class TestData {
 
@@ -16,4 +18,9 @@ public class TestData {
     public static HashedPassword hashedPassword() {
         return HashedPasswordTestBuilder.aHashedPassword().build();
     }
+
+    public static RawPassword rawPassword() {
+        return PasswordTestBuilder.aPassword().build();
+    }
+
 }
