@@ -1,5 +1,7 @@
 package com.github.muhsenerdev.wordai.users.domain;
 
+import com.github.muhsenerdev.commons.core.Assert;
+
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,11 @@ public class PasswordFactory {
 
         return HashedPassword.of(hashedString);
 
+    }
+
+    public RawPassword createRawPasswordWithNoValidation(String value) throws IllegalArgumentException {
+        Assert.hasText(value, "Password value cannot be null or empty.");
+        return RawPassword.of(value);
     }
 
 }

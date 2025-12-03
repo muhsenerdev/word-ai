@@ -29,12 +29,12 @@ import com.github.muhsenerdev.wordai.users.domain.PasswordValidationException;
 @EnableConfigurationProperties(PasswordProps.class)
 @SpringBootTest
 @TestPropertySource(properties = {
-        "password.allowWhitespace=true",
-        "password.minLength=8",
-        "password.maxLength=100",
-        "password.minLowercase=1",
-        "password.minDigit=1",
-        "password.minSpecial=1",
+        "validation.password.allowWhitespace=true",
+        "validation.password.minLength=8",
+        "validation.password.maxLength=100",
+        "validation.password.minLowercase=1",
+        "validation.password.minDigit=1",
+        "validation.password.minSpecial=1",
 })
 public class PassayValidatorTest {
 

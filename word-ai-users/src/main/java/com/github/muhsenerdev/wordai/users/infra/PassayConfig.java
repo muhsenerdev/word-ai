@@ -48,8 +48,6 @@ public class PassayConfig {
             rules.add(new WhitespaceRule());
         }
 
-        log.info("password-white-space-is-allowed: {}", passwordProps.isAllowWhitespace());
-
         return new PasswordValidator(rules);
     }
 

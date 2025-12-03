@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${SERVER_PORT:8080}
 
 spring:
   application:
@@ -7,3 +7,27 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.xml
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/word_ai}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+bootstrap:
+  admin:
+    username: ${ADMIN_USERNAME:admin}
+    password: ${ADMIN_PASSWORD:admin}
+
+validation:
+  password:
+    min-length: ${PASSWORD_MIN_LENGTH:4}
+    max-length: ${PASSWORD_MAX_LENGTH:50}
+    min-uppercase: ${PASSWORD_MIN_UPPERCASE:0}
+    min-lowercase: ${PASSWORD_MIN_LOWERCASE:0}
+    min-digit: ${PASSWORD_MIN_DIGIT:0}
+    min-special: ${PASSWORD_MIN_SPECIAL:0}
+    allow-whitespace: ${PASSWORD_ALLOW_WHITESPACE:false}
