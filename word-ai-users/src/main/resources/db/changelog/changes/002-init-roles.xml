@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.22.xsd">
+
+    <changeSet id="002.1-create-roles-table" author="muhsenerdev">
+        <comment>Creates roles table</comment>
+        <createTable tableName="roles">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+
+
+            <!-- Audit Columns -->
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_by" type="varchar(255)"></column>
+            <column name="updated_by" type="varchar(255)"></column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="002.2-create-users-roles-junction-table" author="muhsenerdev">
+        <comment>Creates 'users_roles' junction table</comment>
+        <createTable tableName="users_roles">
+            <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="user_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_users_roles_user_id"
+                    references="users(id)" />
+            </column>
+            <column name="role_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_users_roles_role_id"
+                    references="roles(id)" />
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
