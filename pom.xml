@@ -29,6 +29,8 @@
     <lombok.version>1.18.32</lombok.version>
     <spring-boot.version>3.5.8</spring-boot.version>
     <liquibase.version>4.22.0</liquibase.version>
+    <passay.version>1.6.1</passay.version>
+    <testcontainers.version>1.21.3</testcontainers.version>
   </properties>
   <dependencies>
     <dependency>
@@ -94,6 +96,24 @@
         <artifactId>liquibase-core</artifactId>
         <groupId>org.liquibase</groupId>
         <version>${liquibase.version}</version>
+      </dependency>
+
+
+      <!-- Validation dependencies -->
+      <dependency>
+        <groupId>org.passay</groupId>
+        <artifactId>passay</artifactId>
+        <version>${passay.version}</version>
+      </dependency>
+
+      <!-- Test Containers -->
+
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
 
 
