@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 
-@ConfigurationProperties(prefix = "password")
+@ConfigurationProperties(prefix = "validation.password")
 @Data
 @Component
 public class PasswordProps {
