@@ -7,4 +7,10 @@ public class Assert {
             throw new IllegalArgumentException(message);
         return object;
     }
+
+    public static String hasText(String text, String message) {
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException(message);
+        return text;
+    }
 }
