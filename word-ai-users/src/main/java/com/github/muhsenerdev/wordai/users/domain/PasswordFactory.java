@@ -11,10 +11,8 @@ public class PasswordFactory {
     private final PasswordValidationPolicy validationPolicy;
     private final PasswordHasher passwordHasher;
 
-    public @Nullable RawPassword createRawPassword(@Nullable String value) throws PasswordValidationException {
-        if (value == null)
-            return null;
-
+    public RawPassword createRawPassword(String value) throws PasswordValidationException {
+        Assert.notNull(value, "Password value cannot be null.");
         validationPolicy.validateOrThrow(value);
 
         return RawPassword.of(value);

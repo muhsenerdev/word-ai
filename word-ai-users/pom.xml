@@ -9,7 +9,6 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.github.muhsenerdev</groupId>
   <artifactId>word-ai-users</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
@@ -30,6 +29,10 @@
 
     <dependency>
       <artifactId>commons-jpa</artifactId>
+      <groupId>com.github.muhsenerdev</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>commons-core</artifactId>
       <groupId>com.github.muhsenerdev</groupId>
     </dependency>
     <dependency>

@@ -9,13 +9,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.github.muhsenerdev</groupId>
-  <artifactId>word-ai-core</artifactId>
+    <artifactId>word-ai-core</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <name>word-ai-core</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

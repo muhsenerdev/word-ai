@@ -1,149 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.8</version>
-    <relativePath />
-    <!-- lookup parent from repository -->
-  </parent>
-  <groupId>com.github.muhsenerdev</groupId>
-  <artifactId>word-ai-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>word-ai-parent</name>
-  <description>Rest APIs for Word AI Project</description>
-  <packaging>pom</packaging>
-  <url />
-  <modules>
-    <module>word-ai-users</module>
-    <module>word-ai-app</module>
-    <module>word-ai-core</module>
-    <module>commons-core</module>
-    <module>commons-jpa</module>
-  </modules>
-  <properties>
-    <java.version>21</java.version>
-    <lombok.version>1.18.32</lombok.version>
-    <spring-boot.version>3.5.8</spring-boot.version>
-    <liquibase.version>4.22.0</liquibase.version>
-    <passay.version>1.6.1</passay.version>
-    <testcontainers.version>1.21.3</testcontainers.version>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-      <version>${lombok.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <version>1.0.2</version>
-    </dependency>
-
-
-  </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <!-- Sub-projects dependencies -->
-      <dependency>
-        <artifactId>word-ai-core</artifactId>
-        <groupId>com.github.muhsenerdev</groupId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <artifactId>word-ai-users</artifactId>
-        <groupId>com.github.muhsenerdev</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>commons-core</artifactId>
-        <groupId>com.github.muhsenerdev</groupId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>commons-jpa</artifactId>
-        <groupId>com.github.muhsenerdev</groupId>
-        <version>${project.version}</version>
-      </dependency>
-
-
-      <!-- Spring Boot dependencies -->
-      <dependency>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.8</version>
+        <relativePath />
+        <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.github.muhsenerdev</groupId>
+    <artifactId>word-ai-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>word-ai-parent</name>
+    <description>Rest APIs for Word AI Project</description>
+    <packaging>pom</packaging>
+    <url />
+    <modules>
+        <module>word-ai-users</module>
+        <module>word-ai-app</module>
+        <module>word-ai-core</module>
+        <module>commons-core</module>
+        <module>commons-jpa</module>
+    </modules>
+    <properties>
+        <java.version>21</java.version>
+        <lombok.version>1.18.32</lombok.version>
+        <spring-boot.version>3.5.8</spring-boot.version>
+        <liquibase.version>4.22.0</liquibase.version>
+        <passay.version>1.6.1</passay.version>
+        <testcontainers.version>1.21.3</testcontainers.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <lombok-binding.version>0.2.0</lombok-binding.version>
+        <javafaker.version>1.0.2</javafaker.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-      <dependency>
-        <artifactId>liquibase-core</artifactId>
-        <groupId>org.liquibase</groupId>
-        <version>${liquibase.version}</version>
-      </dependency>
+        <!-- Mapstruct & Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>${lombok-binding.version}</version>
+        </dependency>
 
 
-      <!-- Validation dependencies -->
-      <dependency>
-        <groupId>org.passay</groupId>
-        <artifactId>passay</artifactId>
-        <version>${passay.version}</version>
-      </dependency>
-
-      <!-- Test Containers -->
-
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>testcontainers-bom</artifactId>
-        <version>${testcontainers.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+        </dependency>
 
 
     </dependencies>
-  </dependencyManagement>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.11.0</version>
-          <configuration>
-            <source>${java.version}</source>
-            <target>${java.version}</target>
-            <annotationProcessorPaths>
-              <path>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Sub-projects dependencies -->
+            <dependency>
+                <artifactId>word-ai-core</artifactId>
+                <groupId>com.github.muhsenerdev</groupId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>word-ai-users</artifactId>
+                <groupId>com.github.muhsenerdev</groupId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>commons-core</artifactId>
+                <groupId>com.github.muhsenerdev</groupId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>commons-jpa</artifactId>
+                <groupId>com.github.muhsenerdev</groupId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <!-- Spring Boot dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <artifactId>liquibase-core</artifactId>
+                <groupId>org.liquibase</groupId>
+                <version>${liquibase.version}</version>
+            </dependency>
+
+
+            <!-- Validation dependencies -->
+            <dependency>
+                <groupId>org.passay</groupId>
+                <artifactId>passay</artifactId>
+                <version>${passay.version}</version>
+            </dependency>
+
+            <!-- Test Containers -->
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <!-- MapStruct dependencies -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-              </path>
-            </annotationProcessorPaths>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>${lombok-binding.version}</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-binding.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

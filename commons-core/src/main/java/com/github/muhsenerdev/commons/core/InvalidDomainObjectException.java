@@ -16,7 +16,7 @@ public class InvalidDomainObjectException extends DomainException {
     }
 
     public InvalidDomainObjectException(String message, String errorCode, Throwable cause) {
-        super(message, cause);
+        super(message, errorCode, cause);
         this.errorCode = errorCode;
     }
 

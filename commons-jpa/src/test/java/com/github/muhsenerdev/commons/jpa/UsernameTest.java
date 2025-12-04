@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.github.muhsenerdev.commons.core.InvalidDomainObjectException;
 
@@ -55,4 +59,67 @@ class UsernameTest {
         Username maxUsername = Username.of(maxLengthValue);
         assertEquals(maxLengthValue, maxUsername.getValue());
     }
+
+    @Test
+    void should_throw_exception_when_value_is_invalid() {
+        String invalidValue = "invalid!user";
+        assertThrows(InvalidDomainObjectException.class, () -> Username.of(invalidValue));
+    }
+
+    static Stream<String> invalidUsernames() {
+        return Stream.of(
+                "user!name", // Contains disallowed character '!'
+                "user@name", // Contains disallowed character '@'
+                "user name", // Contains space
+                "_username", // Contains disallowed character '_'
+                ".username", // Starts with '.'
+                "-username", // Starts with '-'
+                "username.", // Ends with '.'
+                "username-", // Ends with '-'
+                "user..name", // Contains double '.'
+                "user--name", // Contains double '-'
+                "user.-name", // Contains invalid sequence (starts with '.', ends with '-')
+                "user-.name", // Contains invalid sequence (starts with '-', ends with '.')
+                "user..", // Ends with double '.'
+                "--user" // Starts with double '-'
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidUsernames")
+    void should_throw_exception_when_value_is_invalid(String invalidValue) {
+        assertThrows(InvalidDomainObjectException.class, () -> Username.of(invalidValue));
+    }
+
+    static Stream<String> validUsernames() {
+        return Stream.of(
+                "username",
+                "user123",
+                "user_name",
+                "user-name",
+                "user.name",
+                "a".repeat(Username.MIN_LENGTH),
+                "a".repeat(Username.MAX_LENGTH),
+                "user.123",
+                "user-123",
+                "user_123",
+                "user.name.123",
+                "user-name-123",
+                "user_name_123",
+                "john.doe",
+                "jane_smith",
+                "admin",
+                "guest",
+                "testuser");
+    }
+
+    @ParameterizedTest
+    @MethodSource("validUsernames")
+    void should_create_username_with_valid_values(String validValue) {
+        Username username = Username.of(validValue);
+        assertNotNull(username);
+        assertEquals(validValue, username.getValue());
+    }
+
 }
