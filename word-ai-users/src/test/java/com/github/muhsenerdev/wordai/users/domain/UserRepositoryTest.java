@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.dao.DataAccessException;
 
+import com.github.muhsenerdev.commons.jpa.Username;
+
 @SuppressWarnings("null")
 public class UserRepositoryTest extends BasePersistenceIT {
 
@@ -51,9 +53,7 @@ public class UserRepositoryTest extends BasePersistenceIT {
                 // Given
                 roleRepository.saveAndFlush(role);
 
-                User user = UserTestBuilder.aUser()
-                                .withRoles(Set.of(role))
-                                .build();
+                User user = getUserWithRoles(role);
                 repository.saveAndFlush(user);
 
                 // When
@@ -74,13 +74,17 @@ public class UserRepositoryTest extends BasePersistenceIT {
                 assertTrue(count.longValue() > 0, "User row should still exist in DB with deleted_at set");
         }
 
+        private User getUserWithRoles(Role... roles) {
+                return UserTestBuilder.aUser()
+                                .withRoles(Set.of(roles))
+                                .build();
+        }
+
         @Test
         public void should_allow_reuse_username_after_soft_delete() {
                 // Given
 
-                User user1 = UserTestBuilder.aUser()
-                                .withRoles(Set.of(role))
-                                .build();
+                User user1 = getUserWithRoles(role);
                 repository.saveAndFlush(user1);
                 repository.delete(user1);
                 repository.flush();
@@ -104,9 +108,7 @@ public class UserRepositoryTest extends BasePersistenceIT {
         public void should_save_user_with_roles() {
                 // Given
 
-                User user = UserTestBuilder.aUser()
-                                .withRoles(Set.of(role, role2))
-                                .build();
+                User user = getUserWithRoles(role, role2);
 
                 // When
                 User savedUser = repository.saveAndFlush(user);
@@ -127,6 +129,43 @@ public class UserRepositoryTest extends BasePersistenceIT {
                 // When & Then
                 assertThrows(DataAccessException.class, () -> repository.save(user));
 
+        }
+
+        @Test
+        void existsByName_should_return_true() {
+                // Given
+                User user = getUserWithRoles(role);
+                repository.saveAndFlush(user);
+
+                // When
+                boolean exists = repository.existsByUsername(user.getUsername());
+
+                // Then
+                assertTrue(exists);
+        }
+
+        @Test
+        void existsByName_should_return_false() {
+                // Given
+
+                // When
+                boolean exists = repository.existsByUsername(Username.of("non-existent"));
+
+                // Then
+                assertFalse(exists);
+        }
+
+        @Test
+        void existsByUsername_should_filter_soft_deleted() {
+                User user = getUserWithRoles(role);
+                repository.save(user);
+                repository.flush();
+                repository.delete(user);
+                repository.flush();
+                entityManager.clear();
+
+                boolean exists = repository.existsByUsername(user.getUsername());
+                assertFalse(exists);
         }
 
 }
