@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "bootstrap.admin.username",
+    "type": "java.lang.String",
+    "description": "Bootstrap admin username"
+  },
+  {
+    "name": "bootstrap.admin.password",
+    "type": "java.lang.String",
+    "description": "Bootstrap admin password"
+  },
+  {
+    "name": "validation.password.min-length",
+    "type": "java.lang.String",
+    "description": "Validation password min length"
+  },
+  {
+    "name": "validation.password.min-uppercase",
+    "type": "java.lang.String",
+    "description": "Validation password min uppercase"
+  },
+  {
+    "name": "validation.password.max-length",
+    "type": "java.lang.String",
+    "description": "Validation password max length"
+  },
+  {
+    "name": "validation.password.allow-whitespace",
+    "type": "java.lang.String",
+    "description": "Validation password allow whitespace"
+  },
+  {
+    "name": "validation.password.min-special",
+    "type": "java.lang.String",
+    "description": "Validation password min special"
+  },
+  {
+    "name": "validation.password.min-lowercase",
+    "type": "java.lang.String",
+    "description": "Validation password min lowercase"
+  },
+  {
+    "name": "validation.password.min-digit",
+    "type": "java.lang.String",
+    "description": "Validation password min digit"
+  }
+]}

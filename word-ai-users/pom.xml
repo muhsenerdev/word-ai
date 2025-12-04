@@ -21,68 +21,83 @@
   </properties>
 
   <dependencies>
-    <!-- Spring boot -->
+    <!-- Modül Bağımlılıkları -->
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-jpa</artifactId>
+    </dependency>
+    <!-- Test Jar'ı çekiyoruz (BasePersistenceIT için) -->
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-jpa</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring Boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
+    <!-- Tools -->
     <dependency>
-      <artifactId>commons-jpa</artifactId>
-      <groupId>com.github.muhsenerdev</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>commons-core</artifactId>
-      <groupId>com.github.muhsenerdev</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>liquibase-core</artifactId>
       <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
     </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-
-
-    <!-- Validation  -->
     <dependency>
       <groupId>org.passay</groupId>
       <artifactId>passay</artifactId>
     </dependency>
 
-    <!-- Test containers -->
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>postgresql</artifactId>
-      <scope>test</scope>
-    </dependency>
-
+    <!-- Database -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
     </dependency>
 
+    <!-- Test (Kendi testleri için containerlar lazım) -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-testcontainers</artifactId>
+      <scope>test</scope>
     </dependency>
-
 
   </dependencies>
 
   <build>
-
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>

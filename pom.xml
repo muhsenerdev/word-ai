@@ -36,6 +36,7 @@
         <javafaker.version>1.0.2</javafaker.version>
     </properties>
     <dependencies>
+        <!-- ## Core Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -53,7 +54,7 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
@@ -62,39 +63,60 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok-mapstruct-binding</artifactId>
             <version>${lombok-binding.version}</version>
-        </dependency>
+        </dependency> -->
 
-
+        <!-- 
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>${javafaker.version}</version>
-        </dependency>
+        </dependency> -->
 
 
     </dependencies>
     <dependencyManagement>
         <dependencies>
-            <!-- Sub-projects dependencies -->
             <dependency>
-                <artifactId>word-ai-core</artifactId>
                 <groupId>com.github.muhsenerdev</groupId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <artifactId>word-ai-users</artifactId>
-                <groupId>com.github.muhsenerdev</groupId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <artifactId>commons-core</artifactId>
-                <groupId>com.github.muhsenerdev</groupId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <artifactId>commons-jpa</artifactId>
                 <groupId>com.github.muhsenerdev</groupId>
+                <artifactId>commons-jpa</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.muhsenerdev</groupId>
+                <artifactId>commons-jpa</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type> <!-- Test Jar Tanımı -->
+            </dependency>
+            <dependency>
+                <groupId>com.github.muhsenerdev</groupId>
+                <artifactId>word-ai-users</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.github.muhsenerdev</groupId>
+                <artifactId>word-ai-users</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.muhsenerdev</groupId>
+                <artifactId>word-ai-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- TEst Containers Bom -->
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
 
@@ -114,58 +136,34 @@
             </dependency>
 
 
-            <!-- Validation dependencies -->
+            <!--  # Third Part Libraries -->
+
+            <!-- ## Validation dependencies -->
             <dependency>
                 <groupId>org.passay</groupId>
                 <artifactId>passay</artifactId>
                 <version>${passay.version}</version>
             </dependency>
-
-            <!-- Test Containers -->
-
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>testcontainers-bom</artifactId>
-                <version>${testcontainers.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-
-            <!-- MapStruct dependencies -->
+            <!-- ## MapStruct dependencies -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-mapstruct-binding</artifactId>
-                <version>${lombok-binding.version}</version>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>${javafaker.version}</version>
             </dependency>
 
 
         </dependencies>
     </dependencyManagement>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
 
+
+    <build>
         <plugins>
+            <!-- Compiler Ayarı: Tüm çocuklar bunu miras alır -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

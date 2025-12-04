@@ -1,12 +1,10 @@
-package com.github.muhsenerdev.wordai.users;
+package com.github.muhsenerdev.wordai.words;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableConfigurationProperties
-@ComponentScan(basePackages = "com.github.muhsenerdev")
-public class UserTestApplication {
+public class WordsTestApplication {
 
 }

@@ -14,6 +14,7 @@ import com.github.muhsenerdev.wordai.users.domain.RawPassword;
 
 public class TestData {
 
+    @SuppressWarnings("unused")
     private static final Faker FAKER = new Faker();
 
     public static Username username() {
@@ -33,7 +34,7 @@ public class TestData {
     }
 
     public static RawPassword rawPassword() {
-        return PasswordTestBuilder.aPassword().build();
+        return PasswordTestBuilder.aPassword().withValue("aStrongPassword123!").build();
     }
 
     public static CreateUserCommand createUserCommand() {
