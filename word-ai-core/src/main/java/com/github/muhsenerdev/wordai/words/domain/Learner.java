@@ -28,6 +28,11 @@ import lombok.NoArgsConstructor;
 @lombok.Getter
 public class Learner extends SoftDeletableEntity<UserId> {
 
+    public static final String LEARNER_USER_ID_REQUIRED = "learner.user_id.required";
+    public static final String LEARNER_MOTHER_LANGUAGE_REQUIRED = "learner.mother_language.required";
+    public static final String LEARNER_TARGET_LANGUAGE_REQUIRED = "learner.target_language.required";
+    public static final String LEARNER_LANGUAGES_SAME = "learner.languages.same";
+
     @EmbeddedId
     @AttributeOverride(name = "value", column = @Column(name = "user_id", nullable = false))
     private UserId userId;

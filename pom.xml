@@ -34,6 +34,8 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok-binding.version>0.2.0</lombok-binding.version>
         <javafaker.version>1.0.2</javafaker.version>
+        <java-jwt.version>4.5.0</java-jwt.version>
+        <springdoc.version>2.8.14</springdoc.version>
     </properties>
     <dependencies>
         <!-- ## Core Dependencies -->
@@ -54,23 +56,14 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>${mapstruct.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok-mapstruct-binding</artifactId>
-            <version>${lombok-binding.version}</version>
-        </dependency> -->
 
-        <!-- 
+
+        <!-- Springdoc -->
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>${javafaker.version}</version>
-        </dependency> -->
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
 
 
     </dependencies>
@@ -154,6 +147,21 @@
                 <groupId>com.github.javafaker</groupId>
                 <artifactId>javafaker</artifactId>
                 <version>${javafaker.version}</version>
+            </dependency>
+
+            <!-- Security-->
+            <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
+            </dependency>
+
+            <!-- ## OpenAPI dependencies -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
 
 

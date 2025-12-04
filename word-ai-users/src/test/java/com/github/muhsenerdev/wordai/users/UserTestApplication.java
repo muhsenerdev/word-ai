@@ -2,11 +2,11 @@ package com.github.muhsenerdev.wordai.users;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableConfigurationProperties
-@ComponentScan(basePackages = "com.github.muhsenerdev")
+@EnableJpaAuditing
 public class UserTestApplication {
 
 }

@@ -6,4 +6,5 @@ import com.github.muhsenerdev.commons.core.exception.SystemException;
 public interface UserApplicationService {
     UserCreationResponse createUser(CreateUserCommand command)
             throws DuplicateUserException, BusinessValidationException, SystemException;
+
 }
