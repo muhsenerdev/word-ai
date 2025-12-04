@@ -10,7 +10,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @DataJpaTest
-@EnableJpaAuditing
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public abstract class BasePersistenceIT {
@@ -19,7 +18,5 @@ public abstract class BasePersistenceIT {
     @SuppressWarnings("resource")
 
     protected static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17")
-            .withDatabaseName("testdb")
-            .withUsername("sa")
-            .withPassword("sa");
+            .withDatabaseName("testdb").withUsername("sa").withPassword("sa");
 }

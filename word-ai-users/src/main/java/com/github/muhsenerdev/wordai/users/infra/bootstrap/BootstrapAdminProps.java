@@ -1,4 +1,4 @@
-package com.github.muhsenerdev.wordai.bootsrap;
+package com.github.muhsenerdev.wordai.users.infra.bootstrap;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

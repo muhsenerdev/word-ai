@@ -31,3 +31,12 @@ validation:
     min-digit: ${PASSWORD_MIN_DIGIT:0}
     min-special: ${PASSWORD_MIN_SPECIAL:0}
     allow-whitespace: ${PASSWORD_ALLOW_WHITESPACE:false}
+
+security:
+  register-path: ${SECURITY_REGISTER_PATH:/api/v1/auth/register}
+  jwt-secret: ${SECURITY_JWT_SECRET:secret}
+  jwt-expiration-ms: ${SECURITY_JWT_EXPIRATION_MS:86400000}
+
+logging:
+  level:
+    "[org.springframework.security]": DEBUG

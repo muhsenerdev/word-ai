@@ -43,5 +43,20 @@
     "name": "validation.password.min-digit",
     "type": "java.lang.String",
     "description": "Validation password min digit"
+  },
+  {
+    "name": "security.register-path",
+    "type": "java.lang.String",
+    "description": "Security register path"
+  },
+  {
+    "name": "security.jwt-secret",
+    "type": "java.lang.String",
+    "description": "Security jwt secret"
+  },
+  {
+    "name": "security.jwt-expiration-ms",
+    "type": "java.lang.String",
+    "description": "Security jwt expiration ms"
   }
 ]}

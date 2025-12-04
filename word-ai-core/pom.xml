@@ -30,12 +30,15 @@
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-core</artifactId>
+    </dependency>
 
     <!-- Liquibase Test Fix İçin Kritik Hamle -->
     <dependency>
       <groupId>com.github.muhsenerdev</groupId>
       <artifactId>word-ai-users</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.github.muhsenerdev</groupId>

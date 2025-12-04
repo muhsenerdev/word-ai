@@ -12,7 +12,7 @@ import lombok.Data;
 public class PasswordProps {
 
     private int minLength = 1;
-    private int maxLength = 10;
+    private int maxLength = 55;
     private int minUppercase;
     private int minLowercase;
     private int minDigit;

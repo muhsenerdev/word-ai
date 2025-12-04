@@ -11,6 +11,7 @@ import com.github.muhsenerdev.commons.core.exception.DuplicateResourceException;
 import com.github.muhsenerdev.commons.core.exception.SystemException;
 import com.github.muhsenerdev.commons.jpa.RoleName;
 import com.github.muhsenerdev.commons.jpa.Username;
+import com.github.muhsenerdev.wordai.users.domain.PasswordException;
 import com.github.muhsenerdev.wordai.users.domain.PasswordFactory;
 import com.github.muhsenerdev.wordai.users.domain.RoleRepository;
 import com.github.muhsenerdev.wordai.users.domain.UserFactory;
@@ -58,6 +59,8 @@ public class UserApplicationServiceImpl implements UserApplicationService {
             throw e;
         } catch (DomainException e) {
             throw new BusinessValidationException(e.getMessage(), e.getErrorCode(), e);
+        } catch (PasswordException e) {
+            throw new BusinessValidationException(e.getMessage(), e);
         } catch (Exception e) {
             throw new SystemException("Failed to create user, due to : " + e.getMessage(), "unexpected error", e);
         }
