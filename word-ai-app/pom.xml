@@ -21,43 +21,37 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-
-    <!-- Word AI Dependencies -->
+    <!-- Tüm Modülleri Birleştiriyoruz -->
     <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
       <artifactId>word-ai-users</artifactId>
-      <groupId>com.github.muhsenerdev</groupId>
     </dependency>
-
     <dependency>
-      <artifactId>commons-core</artifactId>
       <groupId>com.github.muhsenerdev</groupId>
-    </dependency>
-
-    <dependency>
-      <artifactId>commons-jpa</artifactId>
-      <groupId>com.github.muhsenerdev</groupId>
-    </dependency>
-
-    <dependency>
       <artifactId>word-ai-core</artifactId>
-      <groupId>com.github.muhsenerdev</groupId>
     </dependency>
-
-
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-core</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
-
     <plugins>
+      <!-- Executable Jar Yapmak İçin -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
     </plugins>
-
-
   </build>
+
+
 </project>

@@ -1,0 +1,39 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.22.xsd">
+
+    <changeSet id="001-create-learners-table" author="muhsenerdev">
+        <comment>Create learners table</comment>
+        <createTable tableName="learners">
+            <column name="user_id" type="UUID">
+                <constraints primaryKey="true" nullable="false" foreignKeyName="fk_learnes_users_id"
+                    references="users(id)" />
+            </column>
+            <column name="mother_language" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="target_language" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="created_at" type="timestamptz" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="timestamptz" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="updated_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="deleted_at" type="timestamptz">
+                <constraints nullable="true" />
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

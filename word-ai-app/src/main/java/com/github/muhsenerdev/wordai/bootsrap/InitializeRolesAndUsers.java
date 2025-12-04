@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class InitializeRolesAndUsers {
 
     private final BootstrapAdminProps props;
@@ -56,6 +57,7 @@ public class InitializeRolesAndUsers {
         }
     }
 
+    @SuppressWarnings("unused")
     private void checkAdminProps(BootstrapAdminProps props) {
 
         String usernameString = props.getUsername();

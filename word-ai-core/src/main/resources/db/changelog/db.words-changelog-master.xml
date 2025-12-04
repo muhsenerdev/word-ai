@@ -3,7 +3,5 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.22.xsd">
 
-    <include file="classpath:db/changelog/db.users-changelog-master.xml" />
-    <include file="classpath:db/changelog/db.words-changelog-master.xml" />
-
+    <include file="changes/001-init-learners.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

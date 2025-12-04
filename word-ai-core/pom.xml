@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-    <artifactId>word-ai-core</artifactId>
+  <artifactId>word-ai-core</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <name>word-ai-core</name>
@@ -20,9 +20,62 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-jpa</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
 
+    <!-- Liquibase Test Fix İçin Kritik Hamle -->
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>word-ai-users</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>word-ai-users</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Test -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-testcontainers</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
   <build>
 
 
