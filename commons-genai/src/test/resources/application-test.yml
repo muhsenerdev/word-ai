@@ -1,7 +1,7 @@
 spring:
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/ai-module-changelog-master.xml
+    change-log: classpath:db/changelog/db.ai-module-changelog-master.xml
   jpa:
     hibernate:
       ddl-auto: validate

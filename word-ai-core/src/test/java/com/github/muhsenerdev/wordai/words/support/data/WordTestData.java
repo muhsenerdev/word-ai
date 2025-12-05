@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.github.muhsenerdev.commons.jpa.UserId;
 import com.github.muhsenerdev.wordai.words.application.CreateLearnerCommand;
 import com.github.muhsenerdev.wordai.words.application.LearnerCreationResponse;
 import com.github.muhsenerdev.wordai.words.application.words.BulkInsertWordCommand;
 import com.github.muhsenerdev.wordai.words.application.words.InsertWordCommand;
 
 public class WordTestData {
+
+    public static final UserId MOCK_USER_ID = UserId.of(UUID.fromString("00000000-0000-0000-0000-000000000000"));
 
     public static CreateLearnerCommand createLearnerCommand() {
         return CreateLearnerCommand.builder().userId(UUID.randomUUID()).motherLanguage("ENGLISH")

@@ -1,52 +1,39 @@
 package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.words;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.muhsenerdev.wordai.words.WordsTestApplication;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.github.muhsenerdev.wordai.words.application.words.WordsInsertedListener;
+import com.github.muhsenerdev.wordai.words.domain.WordId;
+import com.github.muhsenerdev.wordai.words.domain.WordRepository;
+import com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.shared.WordsBaseIT;
 import com.github.muhsenerdev.wordai.words.support.data.WordTestData;
 
-@SpringBootTest(classes = WordsTestApplication.class)
-@AutoConfigureMockMvc
-@Testcontainers
-@EntityScan(basePackages = "com.github.muhsenerdev")
-@EnableJpaRepositories(basePackages = "com.github.muhsenerdev")
-@ComponentScan(basePackages = "com.github.muhsenerdev")
-@ActiveProfiles("test")
-@SuppressWarnings("null")
-class WordControllerIT {
+class WordControllerIT extends WordsBaseIT {
 
 	private static final String PATH = "/api/v1/words/bulk";
 
-	@Container
-	@ServiceConnection
-	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17").withDatabaseName("word_ai")
-			.withUsername("postgres").withPassword("postgres");
-
 	@Autowired
-	private MockMvc mockMvc;
+	private WordRepository wordRepository;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+	@MockitoBean
+	public WordsInsertedListener mockListener; // To prevent it from executing.
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
@@ -56,8 +43,21 @@ class WordControllerIT {
 		BulkInsertWordInput input = WordTestData.bulkInsertWordInput(count);
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
-				.andExpect(status().isOk()).andExpect(jsonPath("$.responses", hasSize(count)));
+		MvcResult result = mockMvc
+				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.responses", hasSize(count))).andReturn();
+		;
+
+		verify(mockListener).onWordsInserted(any());
+
+		JsonNode nodObject = super.objectMapper.readTree(result.getResponse().getContentAsByteArray());
+		List<WordId> wordIds = nodObject.get("responses").valueStream()
+				.map(v -> WordId.of(UUID.fromString(v.get("id").asText()))).toList();
+
+		wordIds.forEach(wordId -> {
+			assertThat(wordRepository.existsById(wordId)).isTrue();
+		});
+
 	}
 
 	@Test

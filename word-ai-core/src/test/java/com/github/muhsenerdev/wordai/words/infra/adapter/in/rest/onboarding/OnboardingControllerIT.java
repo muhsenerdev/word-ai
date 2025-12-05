@@ -1,68 +1,41 @@
 package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.muhsenerdev.wordai.words.WordsTestApplication;
+import com.github.muhsenerdev.commons.core.exception.DuplicateResourceException;
+import com.github.muhsenerdev.wordai.users.application.UserCreationResponse;
 import com.github.muhsenerdev.wordai.words.domain.Learner;
+import com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.shared.WordsBaseIT;
 import com.github.muhsenerdev.wordai.words.support.data.OnboardingTestData;
+import com.github.muhsenerdev.wordai.words.support.data.WordTestData;
 
-@SpringBootTest(classes = WordsTestApplication.class)
-@AutoConfigureMockMvc
-@Testcontainers
-@EntityScan(basePackages = "com.github.muhsenerdev")
-@EnableJpaRepositories(basePackages = "com.github.muhsenerdev")
-@ComponentScan(basePackages = "com.github.muhsenerdev")
-@ActiveProfiles("test")
-@SuppressWarnings("null")
-class OnboardingControllerIT {
+class OnboardingControllerIT extends WordsBaseIT {
 
 	private static final String PATH = "/api/v1/auth/register";
-
-	@Container
-	@ServiceConnection
-	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17").withDatabaseName("word_ai")
-			.withUsername("postgres").withPassword("postgres");
-
-	@Autowired
-	private MockMvc mockMvc;
-
-	@Autowired
-	private ObjectMapper objectMapper;
 
 	@Test
 	void should_return_409_when_username_is_taken() throws Exception {
 		// Given
 		OnboardingInput input = OnboardingTestData.onboardingInput();
+		when(userApplicationService.createUser(any()))
+				.thenThrow(new DuplicateResourceException("user", "username", input.getUsername()));
 
-		// Register first time (success)
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
-				.andExpect(status().isOk());
-
-		// When & Then - Register second time (conflict)
+		// When & Then
 		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isConflict());
+
 	}
 
 	@Test
@@ -87,6 +60,9 @@ class OnboardingControllerIT {
 		// Given
 		OnboardingInput input = OnboardingTestData.onboardingInput().toBuilder().motherLanguage("ENGLISH")
 				.targetLanguage("ENGLISH").build();
+
+		when(userApplicationService.createUser(any())).thenReturn(UserCreationResponse.builder()
+				.username(input.getUsername()).id(WordTestData.MOCK_USER_ID.getValue()).roles(Set.of()).build());
 
 		// When & Then
 		MvcResult result = mockMvc

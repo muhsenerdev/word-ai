@@ -38,18 +38,12 @@ public class TestData {
     }
 
     public static CreateUserCommand createUserCommand() {
-        return CreateUserCommand.builder()
-                .username(username().getValue())
-                .password(rawPassword().getValue())
-                .build();
+        return CreateUserCommand.builder().username(username().getValue()).password(rawPassword().getValue()).build();
     }
 
     public static UserCreationResponse userCreationResponse() {
-        return UserCreationResponse.builder()
-                .id(UUID.randomUUID())
-                .username(username().getValue())
-                .roles(java.util.Set.of(randomRoleName().getValue()))
-                .build();
+        return UserCreationResponse.builder().id(UUID.randomUUID()).username(username().getValue())
+                .roles(java.util.Set.of(randomRoleName().getValue())).build();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.github.muhsenerdev.wordai.users.infra.config;
+package com.github.muhsenerdev.wordai.users.infra.config.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

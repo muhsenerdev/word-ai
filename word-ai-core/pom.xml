@@ -51,12 +51,12 @@
       <groupId>com.github.muhsenerdev</groupId>
       <artifactId>word-ai-users</artifactId>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>com.github.muhsenerdev</groupId>
       <artifactId>word-ai-users</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
-    </dependency>
+    </dependency> -->
 
     <dependency>
       <groupId>org.liquibase</groupId>
