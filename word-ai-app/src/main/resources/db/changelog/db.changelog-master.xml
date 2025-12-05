@@ -5,5 +5,6 @@
 
     <include file="classpath:db/changelog/db.users-changelog-master.xml" />
     <include file="classpath:db/changelog/db.words-changelog-master.xml" />
+    <include file="classpath:db/changelog/db.ai-module-changelog-master.xml" />
 
 </databaseChangeLog>

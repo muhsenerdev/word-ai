@@ -1,0 +1,63 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001.1-create-prompt-definitions-table" author="muhsener-be">
+        <comment>Create the table that holds prompts</comment>
+        <createTable tableName="prompt_definitions">
+            <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="varchar" />
+
+            <column name="slug" type="varchar" />
+
+            <column name="output_type" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="provider" type="varchar">
+                <constraints nullable="false" />
+            </column>
+            <column name="model" type="varchar">
+                <constraints nullable="false" />
+            </column>
+            <column name="system_message" type="text" />
+            <column name="user_message_template" type="text">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="input_schema" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="output_schema" type="text" />
+
+            <column name="model_options" type="jsonb" />
+
+            <column name="created_at" type="timestamptz" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="timestamptz" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="deleted_at" type="timestamptz" />
+
+            <column name="created_by" type="varchar" />
+            <column name="updated_by" type="varchar" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="001.2-put-partial-index-on-slug-column" author="muhsener-be">
+        <comment>Puts partial unique index on 'slug' column where deleted_at is NULL</comment>
+        <sql dbms="postgresql"> CREATE UNIQUE INDEX IF NOT EXISTS idx_u_prompts_slug_not_deleted ON
+            prompt_definitions(slug) WHERE deleted_at IS NULL; </sql>
+
+
+        <rollback>
+            <sql dbms="postgresql"> DROP INDEX idx_u_prompts_slug_not_deleted; </sql>
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>

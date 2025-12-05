@@ -22,4 +22,8 @@ public abstract class DomainException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
+    public DomainException(String message, Throwable cause) {
+        this(message, "unknown", cause);
+    }
+
 }
