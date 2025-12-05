@@ -11,6 +11,7 @@ import com.github.muhsenerdev.commons.jpa.Slug;
 import com.github.muhsenerdev.commons.jpa.SoftDeletableEntity;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -59,10 +60,12 @@ public class PromptDefinition extends SoftDeletableEntity<PromptId> {
 
         @Embedded
         @AttributeOverrides(@AttributeOverride(name = "value", column = @Column(name = "input_schema", nullable = true, columnDefinition = "jsonb")))
+        @Nullable
         private PayloadSchema inputSchema;
 
         @Embedded
         @AttributeOverrides(@AttributeOverride(name = "value", column = @Column(name = "output_schema", nullable = true, columnDefinition = "jsonb")))
+        @Nullable
         private PayloadSchema outputSchema;
 
         @Enumerated(EnumType.STRING)
