@@ -20,14 +20,14 @@ public class OnboardingTestData {
                 .accessToken("test-access-token").build();
     }
 
-    public static com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.OnboardingInput onboardingInput() {
-        return com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.OnboardingInput.builder()
+    public static com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding.OnboardingInput onboardingInput() {
+        return com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding.OnboardingInput.builder()
                 .username(TestData.username().getValue()).password("StrongPassword123!").motherLanguage("ENGLISH")
                 .targetLanguage("TURKISH").build();
     }
 
-    public static com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.OnboardingOutput onboardingOutput() {
-        return com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.OnboardingOutput.builder()
+    public static com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding.OnboardingOutput onboardingOutput() {
+        return com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding.OnboardingOutput.builder()
                 .userId(UUID.randomUUID()).roles(Set.of("USER")).accessToken("test-access-token").build();
     }
 }

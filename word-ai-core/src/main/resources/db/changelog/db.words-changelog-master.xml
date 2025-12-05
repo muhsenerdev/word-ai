@@ -4,4 +4,6 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.22.xsd">
 
     <include file="changes/001-init-learners.xml" relativeToChangelogFile="true" />
+    <include file="changes/002-init-words.xml" relativeToChangelogFile="true" />
+    <include file="changes/003-init-cards.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

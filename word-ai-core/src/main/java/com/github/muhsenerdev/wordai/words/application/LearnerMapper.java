@@ -2,18 +2,24 @@ package com.github.muhsenerdev.wordai.words.application;
 
 import java.util.UUID;
 
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
 import com.github.muhsenerdev.commons.jpa.UserId;
 import com.github.muhsenerdev.wordai.words.domain.Learner;
 
-@Mapper(componentModel = "spring")
-public interface LearnerMapper {
+@Component
+public class LearnerMapper {
 
-    LearnerCreationResponse toResponse(Learner learner);
+    public LearnerCreationResponse toResponse(Learner learner) {
+        if (learner == null) {
+            return null;
+        }
+        return LearnerCreationResponse.builder()
+                .userId(learner.getUserId() != null ? learner.getUserId().getValue() : null).build();
+    }
 
-    default UUID map(UserId value) {
-        return value.getValue();
+    public UUID map(UserId value) {
+        return value != null ? value.getValue() : null;
     }
 
 }

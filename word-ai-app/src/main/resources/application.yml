@@ -36,7 +36,12 @@ security:
   register-path: ${SECURITY_REGISTER_PATH:/api/v1/auth/register}
   jwt-secret: ${SECURITY_JWT_SECRET:secret}
   jwt-expiration-ms: ${SECURITY_JWT_EXPIRATION_MS:86400000}
+  # TODO: Be careful about it
+  enabled: ${SECURITY_ENABLED:false}
 
 logging:
   level:
     "[org.springframework.security]": DEBUG
+
+words:
+  max-insertion: ${WORDS_MAX_INSERTION:20}

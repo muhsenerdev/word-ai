@@ -53,8 +53,7 @@ class LearnerApplicationServiceImplTest {
     void create_shouldThrowBusinessValidationException_whenDomainExceptionOccurs() {
         // Given
         CreateLearnerCommand command = WordTestData.createLearnerCommand().toBuilder()
-                .motherLanguage("INVALID_LANGUAGE")
-                .build();
+                .motherLanguage("INVALID_LANGUAGE").build();
 
         // When
         Throwable throwable = catchThrowable(() -> learnerApplicationService.create(command));
@@ -74,7 +73,6 @@ class LearnerApplicationServiceImplTest {
         Throwable throwable = catchThrowable(() -> learnerApplicationService.create(command));
 
         // Then
-        assertThat(throwable).isInstanceOf(SystemException.class)
-                .hasMessageContaining("Failed to create learner");
+        assertThat(throwable).isInstanceOf(SystemException.class).hasMessageContaining("Failed to create learner");
     }
 }

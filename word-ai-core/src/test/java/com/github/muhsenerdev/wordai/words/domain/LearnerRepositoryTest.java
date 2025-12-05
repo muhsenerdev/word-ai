@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.github.muhsenerdev.commons.jpa.BasePersistenceIT;
@@ -24,6 +25,7 @@ import jakarta.persistence.EntityManager;
 
 @EntityScan(basePackages = "com.github.muhsenerdev")
 @EnableJpaRepositories(basePackages = "com.github.muhsenerdev")
+@EnableJpaAuditing
 @SuppressWarnings("null")
 public class LearnerRepositoryTest extends BasePersistenceIT {
 
@@ -60,9 +62,7 @@ public class LearnerRepositoryTest extends BasePersistenceIT {
         // Given
         User user = saveUser();
 
-        Learner learner = LearnerTestBuilder.aLearner()
-                .withUserId(user.getId())
-                .build();
+        Learner learner = LearnerTestBuilder.aLearner().withUserId(user.getId()).build();
 
         // When
         repository.save(learner);
@@ -81,9 +81,7 @@ public class LearnerRepositoryTest extends BasePersistenceIT {
         // Given
         User user = saveUser();
 
-        Learner learner = LearnerTestBuilder.aLearner()
-                .withUserId(user.getId())
-                .build();
+        Learner learner = LearnerTestBuilder.aLearner().withUserId(user.getId()).build();
 
         // When
         repository.save(learner);
@@ -100,8 +98,7 @@ public class LearnerRepositoryTest extends BasePersistenceIT {
         // Then
         // Verify it still exists in DB (native query to bypass @SQLRestrsiction)
         Object deletedAt = entityManager.createNativeQuery("SELECT deleted_at FROM learners WHERE user_id = :userId")
-                .setParameter("userId", user.getId().getValue())
-                .getSingleResult();
+                .setParameter("userId", user.getId().getValue()).getSingleResult();
         assertThat(deletedAt).isNotNull();
 
     }

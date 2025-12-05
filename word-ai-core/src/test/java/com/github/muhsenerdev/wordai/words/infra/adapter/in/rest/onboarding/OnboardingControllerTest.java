@@ -1,9 +1,10 @@
-package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest;
+package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding;
 
-import com.github.muhsenerdev.wordai.words.application.onboarding.OnboardingRequest;
-import com.github.muhsenerdev.wordai.words.application.onboarding.OnboardingResponse;
-import com.github.muhsenerdev.wordai.words.application.onboarding.OnboardingService;
-import com.github.muhsenerdev.wordai.words.support.data.OnboardingTestData;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,10 +13,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import com.github.muhsenerdev.wordai.words.application.onboarding.OnboardingRequest;
+import com.github.muhsenerdev.wordai.words.application.onboarding.OnboardingResponse;
+import com.github.muhsenerdev.wordai.words.application.onboarding.OnboardingService;
+import com.github.muhsenerdev.wordai.words.support.data.OnboardingTestData;
 
 @ExtendWith(MockitoExtension.class)
 class OnboardingControllerTest {
@@ -57,7 +58,6 @@ class OnboardingControllerTest {
         Throwable throwable = catchThrowable(() -> onboardingController.register(input));
 
         // Then
-        assertThat(throwable).isInstanceOf(RuntimeException.class)
-                .hasMessage("Service failed");
+        assertThat(throwable).isInstanceOf(RuntimeException.class).hasMessage("Service failed");
     }
 }

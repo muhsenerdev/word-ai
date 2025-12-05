@@ -26,16 +26,17 @@
     </modules>
     <properties>
         <java.version>21</java.version>
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
         <spring-boot.version>3.5.8</spring-boot.version>
         <liquibase.version>4.22.0</liquibase.version>
         <passay.version>1.6.1</passay.version>
         <testcontainers.version>1.21.3</testcontainers.version>
-        <mapstruct.version>1.6.3</mapstruct.version>
-        <lombok-binding.version>0.2.0</lombok-binding.version>
+
         <javafaker.version>1.0.2</javafaker.version>
         <java-jwt.version>4.5.0</java-jwt.version>
         <springdoc.version>2.8.14</springdoc.version>
+        <hypersistence-utils.version>3.13.1</hypersistence-utils.version>
+        <slugify.version>3.0.7</slugify.version>
     </properties>
     <dependencies>
         <!-- ## Core Dependencies -->
@@ -50,11 +51,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
         </dependency>
 
 
@@ -131,6 +127,14 @@
 
             <!--  # Third Part Libraries -->
 
+            <!-- Slugify -->
+
+            <!-- https://mvnrepository.com/artifact/com.github.slugify/slugify -->
+            <dependency>
+                <groupId>com.github.slugify</groupId>
+                <artifactId>slugify</artifactId>
+                <version>${slugify.version}</version>
+            </dependency>
             <!-- ## Validation dependencies -->
             <dependency>
                 <groupId>org.passay</groupId>
@@ -138,15 +142,19 @@
                 <version>${passay.version}</version>
             </dependency>
             <!-- ## MapStruct dependencies -->
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.github.javafaker</groupId>
                 <artifactId>javafaker</artifactId>
                 <version>${javafaker.version}</version>
+            </dependency>
+            <!-- Hypersistence -->
+            <!--
+            https://mvnrepository.com/artifact/io.hypersistence/hypersistence-utils-hibernate-63 -->
+            <dependency>
+                <groupId>io.hypersistence</groupId>
+                <artifactId>hypersistence-utils-hibernate-63</artifactId>
+                <version>${hypersistence-utils.version}</version>
             </dependency>
 
             <!-- Security-->
@@ -183,16 +191,6 @@
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>${lombok-binding.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

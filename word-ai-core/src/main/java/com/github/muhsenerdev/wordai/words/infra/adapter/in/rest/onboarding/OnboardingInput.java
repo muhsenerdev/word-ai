@@ -1,4 +1,4 @@
-package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest;
+package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.muhsenerdev.commons.jpa.Username;
