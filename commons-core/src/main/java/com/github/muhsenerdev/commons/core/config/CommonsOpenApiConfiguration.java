@@ -25,6 +25,39 @@ public class CommonsOpenApiConfiguration {
             registerSchema(components, InternalResponse.class);
             registerSchema(components, UnauthorizedResponse.class);
             registerSchema(components, ForbiddenResponse.class);
+
+            components.addExamples("Unauthorized",
+                    new io.swagger.v3.oas.models.examples.Example().summary("Unauthorized").value("""
+                            {
+                              "status": 401,
+                              "path": "/api/v1/...",
+                              "timestamp": "2023-10-27T10:00:00Z",
+                              "message": "Unauthorized",
+                              "errors": null
+                            }
+                            """));
+
+            components.addExamples("Forbidden",
+                    new io.swagger.v3.oas.models.examples.Example().summary("Forbidden").value("""
+                            {
+                              "status": 403,
+                              "path": "/api/v1/...",
+                              "timestamp": "2023-10-27T10:00:00Z",
+                              "message": "Forbidden",
+                              "errors": null
+                            }
+                            """));
+
+            components.addExamples("InternalServerError",
+                    new io.swagger.v3.oas.models.examples.Example().summary("Internal Server Error").value("""
+                            {
+                              "status": 500,
+                              "path": "/api/v1/...",
+                              "timestamp": "2023-10-27T10:00:00Z",
+                              "message": "An unexpected error occurred",
+                              "errors": null
+                            }
+                            """));
         };
     }
 

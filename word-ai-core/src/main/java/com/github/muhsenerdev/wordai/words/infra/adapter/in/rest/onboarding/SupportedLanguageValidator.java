@@ -1,4 +1,4 @@
-package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest;
+package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding;
 
 import com.github.muhsenerdev.wordai.words.domain.Language;
 import jakarta.validation.ConstraintValidator;

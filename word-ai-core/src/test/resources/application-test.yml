@@ -10,6 +10,7 @@ security:
   register-path: ${SECURITY_REGISTER_PATH:/api/v1/auth/register}
   jwt-secret: ${SECURITY_JWT_SECRET:so-so-so-so-secret-key-must-be-long-enough-for-hs256-algorithm}
   jwt-expiration-ms: ${SECURITY_JWT_EXPIRATION_MS:86400000}
+  enabled: true
 
 validation:
   password:
@@ -25,3 +26,6 @@ bootstrap:
   admin:
     username: ${ADMIN_USERNAME:admin}
     password: ${ADMIN_PASSWORD:admin}
+
+words:
+  max-insertion: 20

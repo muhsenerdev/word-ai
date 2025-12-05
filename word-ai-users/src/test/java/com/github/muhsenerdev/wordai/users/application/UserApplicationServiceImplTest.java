@@ -58,11 +58,8 @@ class UserApplicationServiceImplTest {
         var rawPassword = TestData.rawPassword();
         var hashedPassword = TestData.hashedPassword();
         var role = Role.of(RoleName.of("USER"));
-        var user = com.github.muhsenerdev.wordai.users.domain.UserTestBuilder.aUser()
-                .withUsername(username)
-                .withPassword(hashedPassword)
-                .withRoles(Set.of(role))
-                .build();
+        var user = com.github.muhsenerdev.wordai.users.domain.UserTestBuilder.aUser().withUsername(username)
+                .withPassword(hashedPassword).withRoles(Set.of(role)).build();
         var expectedResponse = TestData.userCreationResponse();
 
         givenUserDoesNotExist(username);
@@ -171,9 +168,9 @@ class UserApplicationServiceImplTest {
 
     private void givenUserCreationThrowsDomainException() {
         when(userFactory.create(any(Username.class), any(com.github.muhsenerdev.wordai.users.domain.RawPassword.class),
-                any()))
-                .thenThrow(new com.github.muhsenerdev.commons.core.DomainException("Domain error", "error.code") {
-                });
+                any())).thenThrow(
+                        new com.github.muhsenerdev.commons.core.DomainException("Domain error", "error.code") {
+                        });
     }
 
     private void givenUserMapping(com.github.muhsenerdev.wordai.users.domain.User user, UserCreationResponse response) {

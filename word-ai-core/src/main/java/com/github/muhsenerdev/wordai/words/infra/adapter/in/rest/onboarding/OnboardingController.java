@@ -1,4 +1,4 @@
-package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest;
+package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

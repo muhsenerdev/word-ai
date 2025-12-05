@@ -4,27 +4,32 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
 import com.github.muhsenerdev.wordai.users.domain.Role;
 import com.github.muhsenerdev.wordai.users.domain.User;
 
-@Mapper(componentModel = "spring", uses = { CoreMapper.class })
-public interface UserMapper {
+@Component
+public class UserMapper {
 
-    UserCreationResponse toResponse(User user);
-
-    default String fromRoleToString(Role role) {
-        return role == null ? null : role.getName().getValue();
+    public UserCreationResponse toResponse(User user) {
+        if (user == null) {
+            return null;
+        }
+        return UserCreationResponse.builder().id(user.getId() != null ? user.getId().getValue() : null)
+                .username(user.getUsername() != null ? user.getUsername().getValue() : null)
+                .roles(fromRolesToStrings(user.getRoles())).build();
     }
 
-    default Set<String> fromRolesToStrings(Set<Role> roles) {
+    private String fromRoleToString(Role role) {
+        return role == null || role.getName() == null ? null : role.getName().getValue();
+    }
+
+    private Set<String> fromRolesToStrings(Set<Role> roles) {
         if (roles == null) {
-            return Set.of();
+            return java.util.Collections.emptySet();
         }
-        return roles.stream()
-                .map(this::fromRoleToString)
-                .filter(Objects::nonNull)
+        return roles.stream().map(this::fromRoleToString).filter(java.util.Objects::nonNull)
                 .collect(Collectors.toSet());
     }
 

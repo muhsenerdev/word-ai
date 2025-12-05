@@ -29,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Component
 @Slf4j
+@SuppressWarnings("null")
 public class GlobalExceptionHandler {
 
         private final MessageSource messageSource;
@@ -47,7 +48,7 @@ public class GlobalExceptionHandler {
 
                 BadRequestResponse response = BadRequestResponse.builder().timestamp(Instant.now())
                                 .status(HttpStatus.BAD_REQUEST.value()).path(request.getRequestURI()).errors(errors)
-                                .build();
+                                .message("Invalid request.").build();
 
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }

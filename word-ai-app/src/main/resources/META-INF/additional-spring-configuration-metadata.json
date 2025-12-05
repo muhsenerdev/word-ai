@@ -58,5 +58,15 @@
     "name": "security.jwt-expiration-ms",
     "type": "java.lang.String",
     "description": "Security jwt expiration ms"
+  },
+  {
+    "name": "security.enabled",
+    "type": "java.lang.String",
+    "description": "Security enabled"
+  },
+  {
+    "name": "words.max-insertion",
+    "type": "java.lang.String",
+    "description": "Max insertion for 'words.max-insertion'"
   }
 ]}

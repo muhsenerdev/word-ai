@@ -26,6 +26,10 @@
       <groupId>com.github.muhsenerdev</groupId>
       <artifactId>commons-jpa</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-core</artifactId>
+    </dependency>
     <!-- Test Jar'ı çekiyoruz (BasePersistenceIT için) -->
     <dependency>
       <groupId>com.github.muhsenerdev</groupId>

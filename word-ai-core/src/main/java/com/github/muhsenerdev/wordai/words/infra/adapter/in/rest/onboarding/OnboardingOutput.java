@@ -1,4 +1,4 @@
-package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest;
+package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.onboarding;
 
 import java.util.Set;
 import java.util.UUID;
