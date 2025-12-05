@@ -12,6 +12,7 @@ import com.github.muhsenerdev.commons.jpa.Slug;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EntityScan(basePackages = "com.github.muhsenerdev")
 @EnableJpaRepositories(basePackages = "com.github.muhsenerdev")
 @EnableJpaAuditing
-@SuppressWarnings("null")
+@Slf4j
 class PromptDefinitionRepositoryTest extends BasePersistenceIT {
 
     @PersistenceContext
@@ -48,7 +49,7 @@ class PromptDefinitionRepositoryTest extends BasePersistenceIT {
         assertTrue(byId.isPresent());
         PromptDefinition found = byId.get();
 
-        assertEquals(found, def, "Saved and found prompt definitions must be equal.");
+        assertEquals(found, def, "Saved and found prompt definitions must beequal.");
     }
 
     private static PromptDefinition getADefinition() {
@@ -73,11 +74,11 @@ class PromptDefinitionRepositoryTest extends BasePersistenceIT {
     @DisplayName("ExistsBySlug - Exists")
     public void existsBySlug_whenExists_shouldReturnTrue() {
         PromptDefinition aDefinition = getADefinition();
-        repository.save(aDefinition);
+        repository.saveAndFlush(aDefinition);
 
-        boolean exists = repository.existsBySlug(aDefinition.getSlug());
+        boolean existsBySlug = repository.existsBySlug(aDefinition.getSlug());
 
-        assertTrue(exists);
+        assertTrue(existsBySlug);
     }
 
     @Test

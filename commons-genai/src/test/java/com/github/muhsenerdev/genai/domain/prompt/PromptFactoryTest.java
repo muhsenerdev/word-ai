@@ -13,30 +13,31 @@ class PromptFactoryTest {
 
     PromptFactory factory = TestBeans.promptFactory();
 
-    PromptCreationDetails details = PromptTestData.aPromptCreationDetails().build();
+    PromptCreationData data = PromptTestData.aPromptCreationData();
 
     @Test
     @DisplayName("Create Prompt Definition - Success")
     void create_should_create_prompt_definition() {
-        PromptDefinition definition = factory.create(details);
+        PromptDefinition definition = factory.create(data);
 
-        assertEquals(details.name(), definition.getName());
-        assertEquals(details.slug(), definition.getSlug());
-        assertEquals(details.provider(), definition.getProvider());
-        assertEquals(details.model(), definition.getModel());
-        assertEquals(details.systemMessage(), definition.getSystemMessage());
-        assertEquals(details.userMessageTemplate(), definition.getUserMessageTemplate());
-        assertEquals(details.modelOptions(), definition.getModelOptions());
-        assertEquals(details.inputSchema(), definition.getInputSchema());
-        assertEquals(details.outputSchema(), definition.getOutputSchema());
         assertNotNull(definition.getId());
+        assertEquals(data.name(), definition.getName());
+        assertEquals(data.slug(), definition.getSlug());
+        assertEquals(data.provider(), definition.getProvider());
+        assertEquals(data.model(), definition.getModel());
+        assertEquals(data.systemMessage(), definition.getSystemMessage());
+        assertEquals(data.userMessageTemplate(), definition.getUserMessageTemplate());
+        assertEquals(data.modelOptions(), definition.getModelOptions());
+        assertEquals(data.inputSchema(), definition.getInputSchema());
+        assertEquals(data.outputSchema(), definition.getOutputSchema());
+        assertEquals(data.outputType(), definition.getOutputType());
+
         assertNull(definition.getCreatedAt());
         assertNull(definition.getUpdatedAt());
         assertNull(definition.getCreatedBy());
         assertNull(definition.getUpdatedBy());
         assertFalse(definition.isDeleted());
         assertNull(definition.getDeletedAt());
-        assertEquals(details.outputType(), definition.getOutputType());
 
     }
 }

@@ -6,9 +6,9 @@ import com.github.muhsenerdev.commons.core.exception.SystemException;
 
 public interface PromptApplicationService {
 
-    PromptDefCreationResponse create(CreatePromptDefCommand command);
-
     PromptRunResponse run(RunPromptCommand command)
             throws BusinessValidationException, ResourceNotFoundException, SystemException;
+
+    PromptCreationResponse create(CreatePromptCommand command);
 
 }

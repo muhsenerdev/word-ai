@@ -20,9 +20,10 @@ public class PayloadValidator {
     private final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
     private final ObjectMapper objectMapper;
 
-    public void validateOrThrow(@NotNull Map<String, Object> input, @NotNull PayloadBlueprint blueprint) {
+    public void validateOrThrow(@NotNull Map<String, Object> input, @NotNull PayloadSchema blueprint) {
         try {
-            JsonSchema schema = factory.getSchema(blueprint.getRawSchemaContent());
+
+            JsonSchema schema = factory.getSchema(blueprint.getValue());
             String inputString = objectMapper.writeValueAsString(input);
             JsonNode inputNode = objectMapper.readTree(inputString);
 

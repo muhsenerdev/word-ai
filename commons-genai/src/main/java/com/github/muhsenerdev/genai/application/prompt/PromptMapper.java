@@ -1,8 +1,19 @@
 package com.github.muhsenerdev.genai.application.prompt;
 
-import com.github.muhsenerdev.genai.domain.prompt.PromptCreationDetails;
+import org.springframework.stereotype.Component;
 
-public interface PromptMapper {
+import com.github.muhsenerdev.genai.domain.prompt.PromptCreationData;
 
-    PromptCreationDetails toCreationDetails(CreatePromptDefCommand command);
+@Component
+public class PromptMapper {
+
+    public PromptCreationData toCreationData(CreatePromptCommand command) {
+        if (command == null)
+            return null;
+
+        return PromptCreationData.builder().name(command.name()).inputSchema(command.inputSchema())
+                .outputSchema(command.outputSchema()).model(command.model()).modelOptions(command.modelOptions())
+                .provider(command.provider()).slug(command.slug()).outputType(command.outputType())
+                .userMessageTemplate(command.userMessageTemplate()).systemMessage(command.systemMessage()).build();
+    }
 }

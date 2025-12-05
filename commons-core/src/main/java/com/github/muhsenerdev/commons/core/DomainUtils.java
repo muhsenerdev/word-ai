@@ -47,4 +47,14 @@ public class DomainUtils {
             throw new InvalidDomainObjectException(message, errorCode);
     }
 
+    public static InvalidDomainObjectException invalidDomainObjectException(String message, String code) {
+        return new InvalidDomainObjectException(message, code);
+    }
+
+    public static void isTrue(boolean value, String message, String code) {
+        if (!value)
+            throw new InvalidDomainObjectException(message, code);
+
+    }
+
 }
