@@ -101,7 +101,7 @@ public class GlobalExceptionHandler {
         @ExceptionHandler(Exception.class)
         @Hidden
         public ResponseEntity<ErrorResponse> handleException(Exception ex, HttpServletRequest request) {
-                log.error("PATH: {}, Reason: {}", request.getRequestURI(), ex.getMessage());
+                log.error("PATH: {}, Reason: {}", request.getRequestURI(), ex.getMessage(), ex);
 
                 Map<String, String> errors = new HashMap<>();
 

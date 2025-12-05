@@ -1,10 +1,12 @@
 package com.github.muhsenerdev.genai.support.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.github.muhsenerdev.genai.domain.prompt.PayloadBlueprintFactory;
+import com.github.muhsenerdev.genai.application.prompt.PromptVoMapper;
+import com.github.muhsenerdev.genai.domain.prompt.PayloadSchemaFactory;
 import com.github.muhsenerdev.genai.domain.prompt.PayloadValidator;
 import com.github.muhsenerdev.genai.domain.prompt.PromptFactory;
+import com.github.muhsenerdev.genai.infra.adapter.in.rest.prompt.PromptWebMapper;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -12,21 +14,21 @@ import lombok.NoArgsConstructor;
 public class TestBeans {
 
     private static final ObjectMapper OBJECT_MAPPER;
-    private static final PayloadBlueprintFactory PAYLOAD_BLUEPRINT_FACTORY;
     private static final PromptFactory PROMPT_FACTORY;
+    private static final PayloadSchemaFactory SCHEMA_FACTORY;
 
     static {
         OBJECT_MAPPER = new ObjectMapper();
-        PAYLOAD_BLUEPRINT_FACTORY = new PayloadBlueprintFactory(OBJECT_MAPPER);
         PROMPT_FACTORY = new PromptFactory();
+        SCHEMA_FACTORY = new PayloadSchemaFactory();
     }
 
     public static ObjectMapper objectMapper() {
         return OBJECT_MAPPER;
     }
 
-    public static PayloadBlueprintFactory payloadBlueprintFactory() {
-        return PAYLOAD_BLUEPRINT_FACTORY;
+    public static PayloadSchemaFactory payloadSchemaFactory() {
+        return SCHEMA_FACTORY;
     }
 
     public static PromptFactory promptFactory() {
@@ -35,5 +37,13 @@ public class TestBeans {
 
     public static PayloadValidator payloadValidator() {
         return new PayloadValidator(objectMapper());
+    }
+
+    public static PromptVoMapper voMapper() {
+        return new PromptVoMapper(SCHEMA_FACTORY);
+    }
+
+    public static PromptWebMapper promptWebMapper() {
+        return new PromptWebMapper(voMapper());
     }
 }

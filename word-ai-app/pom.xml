@@ -41,6 +41,10 @@
       <groupId>com.github.muhsenerdev</groupId>
       <artifactId>commons-core</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.muhsenerdev</groupId>
+      <artifactId>commons-genai</artifactId>
+    </dependency>
 
   </dependencies>
   <build>

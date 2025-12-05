@@ -67,8 +67,7 @@ class UsernameTest {
     }
 
     static Stream<String> invalidUsernames() {
-        return Stream.of(
-                "user!name", // Contains disallowed character '!'
+        return Stream.of("user!name", // Contains disallowed character '!'
                 "user@name", // Contains disallowed character '@'
                 "user name", // Contains space
                 "_username", // Contains disallowed character '_'
@@ -93,25 +92,9 @@ class UsernameTest {
     }
 
     static Stream<String> validUsernames() {
-        return Stream.of(
-                "username",
-                "user123",
-                "user_name",
-                "user-name",
-                "user.name",
-                "a".repeat(Username.MIN_LENGTH),
-                "a".repeat(Username.MAX_LENGTH),
-                "user.123",
-                "user-123",
-                "user_123",
-                "user.name.123",
-                "user-name-123",
-                "user_name_123",
-                "john.doe",
-                "jane_smith",
-                "admin",
-                "guest",
-                "testuser");
+        return Stream.of("username", "user123", "user_name", "user-name", "user.name", "a".repeat(Username.MIN_LENGTH),
+                "a".repeat(Username.MAX_LENGTH), "user.123", "user-123", "user_123", "user.name.123", "user-name-123",
+                "user_name_123", "john.doe", "jane_smith", "admin", "guest", "testuser");
     }
 
     @ParameterizedTest

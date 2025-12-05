@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import com.github.muhsenerdev.commons.core.Assert;
 import com.github.muhsenerdev.commons.jpa.Slug;
+import com.github.muhsenerdev.genai.support.data.PromptTestData;
 import com.github.muhsenerdev.genai.support.data.TestData;
 
 public class PromptDefinitionTestBuilder {
@@ -16,8 +17,8 @@ public class PromptDefinitionTestBuilder {
     private String model = "test-model";
     private String systemMessage = "You are a helpful assistant.";
     private String userMessageTemplate = "Hello, {name}!";
-    private PayloadBlueprint inputSchema = TestData.payloadBlueprint();
-    private PayloadBlueprint outputSchema = TestData.payloadBlueprint();
+    private PayloadSchema inputSchema = PromptTestData.payloadSchema();
+    private PayloadSchema outputSchema = PromptTestData.payloadSchema();
     private Map<String, Object> modelOptions = new HashMap<>();
     private PromptOutputType outputType = PromptOutputType.TEXT;
 
@@ -77,12 +78,12 @@ public class PromptDefinitionTestBuilder {
         return this;
     }
 
-    public PromptDefinitionTestBuilder withInputSchema(PayloadBlueprint inputSchema) {
+    public PromptDefinitionTestBuilder withInputSchema(PayloadSchema inputSchema) {
         this.inputSchema = inputSchema;
         return this;
     }
 
-    public PromptDefinitionTestBuilder withOutputSchema(PayloadBlueprint outputSchema) {
+    public PromptDefinitionTestBuilder withOutputSchema(PayloadSchema outputSchema) {
         this.outputSchema = outputSchema;
         return this;
     }

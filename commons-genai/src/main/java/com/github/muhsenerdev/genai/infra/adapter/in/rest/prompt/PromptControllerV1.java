@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/prompts")
 public class PromptControllerV1 extends PromptBaseController {
 
-    public PromptControllerV1(PromptRestMapper mapper, PromptApplicationService service) {
+    public PromptControllerV1(PromptWebMapper mapper, PromptApplicationService service) {
         super(mapper, service);
     }
 }
