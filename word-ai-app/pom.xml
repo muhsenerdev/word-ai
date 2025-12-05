@@ -41,8 +41,8 @@
       <groupId>com.github.muhsenerdev</groupId>
       <artifactId>commons-core</artifactId>
     </dependency>
-  </dependencies>
 
+  </dependencies>
   <build>
     <plugins>
       <!-- Executable Jar Yapmak İçin -->
