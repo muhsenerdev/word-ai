@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.22.xsd">
+
+    <!-- 
+      BU DOSYA SADECE CORE TESTLERİNDE ÇALIŞIR.
+      Gerçek Users tablosunu taklit eder.
+      Preconditions kullanarak güvenliği sağlıyoruz: Eğer tablo zaten varsa hata verme, pas geç.
+    -->
+
+    <changeSet id="mock-users-table-001" author="test-env">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="users">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="mock-users-data-001" author="test-env">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM users WHERE id =
+                '00000000-0000-0000-0000-000000000000'</sqlCheck>
+        </preConditions>
+        <insert tableName="users">
+            <column name="id" value="00000000-0000-0000-0000-000000000000" />
+            <column name="username" value="test-user" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
