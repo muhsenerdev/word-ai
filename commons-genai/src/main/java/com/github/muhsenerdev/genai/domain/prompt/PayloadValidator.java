@@ -38,4 +38,22 @@ public class PayloadValidator {
         }
 
     }
+
+    public void validateOrThrow(JsonNode inputNode, @NotNull PayloadSchema blueprint) {
+        try {
+            // 1. Create Schema from blueprint.
+            JsonSchema schema = factory.getSchema(blueprint.getValue());
+
+            Set<ValidationMessage> errors = schema.validate(inputNode);
+            if (!errors.isEmpty())
+                throw new PayloadValidationException("Failed to validate payload: " + errors);
+
+        } catch (PayloadValidationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new PayloadValidationException(e.getMessage(), e);
+        }
+
+    }
+
 }

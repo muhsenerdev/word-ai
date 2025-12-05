@@ -20,7 +20,8 @@ import java.util.List;
 public class RunPromptCommandHandler implements RunPromptUseCase {
 
     private final PromptDefinitionRepository repository;
-    private final List<PromptExecutorStrategy> executors;
+    private final List<PromptExecutorStrategy> executors; // DevNote: Only text executor exists, image executor is
+                                                          // commented out
 
     @Override
     @Transactional

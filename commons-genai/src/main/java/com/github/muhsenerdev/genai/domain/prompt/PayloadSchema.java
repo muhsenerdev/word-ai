@@ -5,7 +5,6 @@ import org.hibernate.type.SqlTypes;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.github.muhsenerdev.commons.core.Assert;
 import com.github.muhsenerdev.commons.core.DomainUtils;
 import com.github.muhsenerdev.commons.core.InvalidDomainObjectException;
 
@@ -16,6 +15,7 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
@@ -26,6 +26,7 @@ public class PayloadSchema {
 	@Column(name = "value", columnDefinition = "jsonb")
 	@Type(JsonType.class)
 	@JdbcTypeCode(SqlTypes.JSON)
+	@NonNull
 	private JsonNode value;
 
 	// It trusts PayloadSchemaFactory for deep validation.

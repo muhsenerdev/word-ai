@@ -30,7 +30,10 @@ public class PromptVoMapper {
 	}
 
 	public PayloadSchema toPayloadSchema(JsonNode source) {
-		return Optional.ofNullable(source).map(schemaFactory::create).orElse(null);
+		if (source == null || source.isNull()) {
+			return null;
+		}
+		return schemaFactory.create(source);
 	}
 
 	public PromptOutputType toOutputType(String source) {

@@ -50,6 +50,10 @@ security:
 logging:
   level:
     "[org.springframework.security]": DEBUG
+    "[com.github.muhsenerdev]": TRACE
 
 words:
   max-insertion: ${WORDS_MAX_INSERTION:20}
+
+prompts:
+  english-to-turkish: ${PROMPTS_ENGLISH_TO_TURKISH:english-turkish-1}
