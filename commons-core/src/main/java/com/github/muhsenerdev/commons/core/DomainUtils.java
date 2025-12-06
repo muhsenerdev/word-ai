@@ -63,9 +63,4 @@ public class DomainUtils {
 			throw new InvalidDomainObjectException(message, errorCode);
 	}
 
-	public static <T> void hasSize(Collection<T> collection, int size, String message, String errorCode) {
-		if (collection == null || collection.size() != size)
-			throw new InvalidDomainObjectException(message, errorCode);
-	}
-
 }
