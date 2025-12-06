@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SessionDomainService {
 
-	private SessionRepository sessionRepository;
+	private final SessionRepository sessionRepository;
 
 	public Session startSession(Set<Word> words, UserId userId)
 			throws SessionDomainException, IllegalArgumentException {

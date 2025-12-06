@@ -30,7 +30,7 @@ public class WordSuggestionService {
 		Assert.notNull(motherLanguage, "motherLanuge cannot be null");
 		// * t
 		long start = System.currentTimeMillis();
-		Set<Word> words = wordRepository.findRandomNewWordsForUser(userId, motherLanguage, number);
+		Set<Word> words = wordRepository.findRandomNewWordsForUser(userId, learningLanguage, number);
 		long end = System.currentTimeMillis();
 		log.info("Time taken to suggest words: {} ms", end - start);
 		return words;

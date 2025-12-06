@@ -10,7 +10,12 @@ import lombok.Data;
 @Component
 public class SecurityProperties {
 
-    private String jwtSecret;
-    private long jwtExpirationMs;
+	private String jwtSecret;
+	private long jwtExpirationMs;
+	private String issuer;
+	private String loginUrl;
+	private String registerUrl;
+	private String usernameParameter;
+	private String passwordParameter;
 
 }

@@ -44,8 +44,11 @@ security:
   register-path: ${SECURITY_REGISTER_PATH:/api/v1/auth/register}
   jwt-secret: ${SECURITY_JWT_SECRET:secret}
   jwt-expiration-ms: ${SECURITY_JWT_EXPIRATION_MS:86400000}
-  # TODO: Be careful about it
-  enabled: ${SECURITY_ENABLED:false}
+  enabled: ${SECURITY_ENABLED:true}
+  login-url: ${LOGIN_URL:/api/v1/auth/login}
+  username-parameter: username
+  password-parameter: password
+  
 
 logging:
   level:

@@ -1,6 +1,5 @@
 package com.github.muhsenerdev.wordai.words.application.session;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
@@ -11,13 +10,19 @@ import com.github.muhsenerdev.commons.core.exception.ResourceNotFoundException;
 import com.github.muhsenerdev.commons.core.exception.SystemException;
 import com.github.muhsenerdev.commons.jpa.UserId;
 import com.github.muhsenerdev.wordai.words.application.LearnerNotFoundException;
-import com.github.muhsenerdev.wordai.words.domain.*;
+import com.github.muhsenerdev.wordai.words.domain.LearnerRepository;
+import com.github.muhsenerdev.wordai.words.domain.Session;
+import com.github.muhsenerdev.wordai.words.domain.SessionDomainService;
+import com.github.muhsenerdev.wordai.words.domain.SessionRepository;
+import com.github.muhsenerdev.wordai.words.domain.Word;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class StartSessionCommandHandler {
 
 	private final SessionRepository sessionRepository;

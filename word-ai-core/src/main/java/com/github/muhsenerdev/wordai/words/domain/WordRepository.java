@@ -18,22 +18,6 @@ public interface WordRepository extends JpaRepository<Word, WordId> {
 
 	@Query(value = """
 			SELECT w.* FROM words w
-			WHERE NOT EXISTS (
-				SELECT 1
-				FROM session_words sw
-				JOIN sessions s ON sw.session_id = s.id
-				WHERE sw.word_id = w.id
-					AND s.user_id = :userId
-					AND sw.learned = true
-			) AND w.language = :language
-					ORDER BY RANDOM()
-					LIMIT :number
-			""", nativeQuery = true)
-	Set<Word> findRandomNewWordsForUser(@Param("userId") UserId userId, @Param("language") Language language,
-			@Param("number") int number);
-
-	@Query(value = """
-			SELECT w.* FROM words w
 			WHERE w.language = :#{#language.name()}
 			  AND NOT EXISTS (
 			    SELECT 1
@@ -46,7 +30,7 @@ public interface WordRepository extends JpaRepository<Word, WordId> {
 			ORDER BY RANDOM()
 			LIMIT :limit
 			""", nativeQuery = true)
-	Set<Word> findRandomNewWordsForUser2(@Param("userId") UserId userId, @Param("language") Language language,
+	Set<Word> findRandomNewWordsForUser(@Param("userId") UserId userId, @Param("language") Language language,
 			@Param("limit") int limit);
 
 }

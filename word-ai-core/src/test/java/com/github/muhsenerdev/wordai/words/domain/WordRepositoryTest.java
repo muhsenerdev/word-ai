@@ -181,7 +181,7 @@ class WordRepositoryTest extends BasePersistenceIT {
 		sessionRepository.saveAndFlush(session2);
 
 		// When: Ask for 5 new words
-		java.util.Set<Word> newWords = wordRepository.findRandomNewWordsForUser2(userId, Language.ENGLISH, 5);
+		java.util.Set<Word> newWords = wordRepository.findRandomNewWordsForUser(userId, Language.ENGLISH, 5);
 
 		// Then: Should return only 1 word (word5), as the other 4 are already learned
 		assertThat(newWords).hasSize(1);
