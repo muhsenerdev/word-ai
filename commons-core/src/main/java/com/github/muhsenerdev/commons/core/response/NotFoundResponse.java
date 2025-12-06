@@ -16,13 +16,13 @@ import lombok.AllArgsConstructor;
 @Schema(description = "Resource not found error response (404)")
 public class NotFoundResponse extends ErrorResponse {
 
-    @JsonProperty("resource_name")
-    @Schema(description = "Name of the resource")
-    private String resourceName;
+	@JsonProperty("resource_name")
+	@Schema(description = "Name of the resource")
+	private String resourceName;
 
-    @Schema(description = "Field that caused the error")
-    private String field;
+	@Schema(description = "Field that caused the error")
+	private String field;
 
-    @Schema(description = "Value of the field")
-    private String value;
+	@Schema(description = "Value of the field")
+	private String value;
 }

@@ -13,6 +13,8 @@ public class WordsOpenApiConfiguration {
 	public static final String EXAMPLE_UNKNOWN_CEFR_LEVEL = "UnknownCefrLevel";
 	public static final String EXAMPLE_INVALID_PART_OF_SPEECH = "InvalidPartOfSpeech";
 	public static final String EXAMPLE_WORDS_REQUIRED = "WordsRequired";
+	public static final String EXAMPLE_DAILY_LIMIT_REACHED = "DailyLimitReached";
+	public static final String EXAMPLE_LEARNER_NOT_FOUND = "LearnerNotFound";
 
 	@Bean
 	public OpenApiCustomizer wordsOpenApiCustomizer() {
@@ -37,17 +39,18 @@ public class WordsOpenApiConfiguration {
 							}
 							"""));
 
-			openApi.getComponents().addExamples(EXAMPLE_INVALID_LANGUAGE, new Example().summary("Invalid language").value("""
-					{
-					    "status": 400,
-					    "path": "/api/v1/words/bulk",
-					    "timestamp": "2025-12-04T22:16:32.856360Z",
-					    "errors": {
-					        "language.unknown": "Language is not supported."
-					    },
-					    "message": "Language is not supported."
-					}
-					"""));
+			openApi.getComponents().addExamples(EXAMPLE_INVALID_LANGUAGE,
+					new Example().summary("Invalid language").value("""
+							{
+							    "status": 400,
+							    "path": "/api/v1/words/bulk",
+							    "timestamp": "2025-12-04T22:16:32.856360Z",
+							    "errors": {
+							        "language.unknown": "Language is not supported."
+							    },
+							    "message": "Language is not supported."
+							}
+							"""));
 
 			openApi.getComponents().addExamples(EXAMPLE_UNKNOWN_CEFR_LEVEL,
 					new Example().summary("Unknown CEFR level").value("""
@@ -75,17 +78,46 @@ public class WordsOpenApiConfiguration {
 							}
 							"""));
 
-			openApi.getComponents().addExamples(EXAMPLE_WORDS_REQUIRED, new Example().summary("Words required").value("""
-					{
-					    "status": 400,
-					    "path": "/api/v1/words/bulk",
-					    "timestamp": "2025-12-05T00:04:04.872434Z",
-					    "errors": {
-					        "words.required": "words.required"
-					    },
-					    "message": "Invalid request."
-					}
-					"""));
+			openApi.getComponents().addExamples(EXAMPLE_WORDS_REQUIRED,
+					new Example().summary("Words required").value("""
+							{
+							    "status": 400,
+							    "path": "/api/v1/words/bulk",
+							    "timestamp": "2025-12-05T00:04:04.872434Z",
+							    "errors": {
+							        "words.required": "words.required"
+							    },
+							    "message": "Invalid request."
+							}
+							"""));
+
+			openApi.getComponents().addExamples(EXAMPLE_DAILY_LIMIT_REACHED, new Example()
+					.summary("Daily session limit reached")
+					.value("""
+							{
+							    "status": 400,
+							    "path": "/api/v1/sessions/start",
+							    "timestamp": "2025-12-06T07:15:00.000000Z",
+							    "errors": {
+							        "session.start.daily-limit-reached": "User 123e4567-e89b-12d3-a456-426614174000 has reached daily session limit."
+							    },
+							    "message": "User 123e4567-e89b-12d3-a456-426614174000 has reached daily session limit."
+							}
+							"""));
+
+			openApi.getComponents().addExamples(EXAMPLE_LEARNER_NOT_FOUND,
+					new Example().summary("Learner not found").value("""
+							{
+							    "status": 404,
+							    "path": "/api/v1/sessions/start",
+							    "timestamp": "2025-12-06T07:15:00.000000Z",
+							    "errors": null,
+							    "message": "Learner not found with id: 123e4567-e89b-12d3-a456-426614174000",
+							    "resource_name": "learner",
+							    "field": "userId",
+							    "value": "123e4567-e89b-12d3-a456-426614174000"
+							}
+							"""));
 		};
 	}
 }

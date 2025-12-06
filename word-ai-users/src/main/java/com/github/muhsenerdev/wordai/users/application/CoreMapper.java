@@ -8,11 +8,11 @@ import com.github.muhsenerdev.commons.jpa.Username;
 @Component
 public class CoreMapper {
 
-    public <T> T fromBaseId(BaseEmbeddableId<T> baseEmbeddableId) {
-        return baseEmbeddableId == null ? null : baseEmbeddableId.getValue();
-    }
+	public <T> T fromBaseId(BaseEmbeddableId<T> baseEmbeddableId) {
+		return baseEmbeddableId == null ? null : baseEmbeddableId.getValue();
+	}
 
-    public String fromUsernameToString(Username username) {
-        return username == null ? null : username.getValue();
-    }
+	public String fromUsernameToString(Username username) {
+		return username == null ? null : username.getValue();
+	}
 }

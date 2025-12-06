@@ -1,17 +1,19 @@
 package com.github.muhsenerdev.wordai.words.domain;
 
-import com.github.muhsenerdev.commons.jpa.BasePersistenceIT;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import java.util.Optional;
+import com.github.muhsenerdev.commons.jpa.BasePersistenceIT;
+import com.github.muhsenerdev.wordai.words.support.data.WordTestData;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @SuppressWarnings("null")
 @EnableJpaAuditing
@@ -25,6 +27,12 @@ class WordRepositoryTest extends BasePersistenceIT {
 
 	@Autowired
 	private CardRepository cardRepository;
+
+	@Autowired
+	private LearnerRepository learnerRepository;
+
+	@Autowired
+	private SessionRepository sessionRepository;
 
 	@org.junit.jupiter.api.BeforeEach
 	void setUp() {
@@ -104,7 +112,6 @@ class WordRepositoryTest extends BasePersistenceIT {
 		assertThat(foundWord.get().getCards()).isEmpty();
 	}
 
-	// When deleting a word, it should delete all its cards
 	@Test
 	void shouldDeleteCardsWhenDeletingWord() {
 		// Given
@@ -126,6 +133,59 @@ class WordRepositoryTest extends BasePersistenceIT {
 		assertThat(foundWord).isEmpty();
 		Optional<Card> foundCard = cardRepository.findById(card.getId());
 		assertThat(foundCard).isEmpty();
+	}
+
+	@Test
+	void findRandomNewWordsForUser_shouldReturnOnlyUnlearnedWords() {
+		Learner learner = LearnerTestBuilder.aLearner().withUserId(WordTestData.MOCK_USER_ID).build();
+		learnerRepository.saveAndFlush(learner);
+
+		// Given: Setup 5 words in the database
+		Word word1 = WordTestBuilder.aWord().language(Language.ENGLISH).build();
+		Word word2 = WordTestBuilder.aWord().language(Language.ENGLISH).build();
+		Word word3 = WordTestBuilder.aWord().language(Language.ENGLISH).build();
+		Word word4 = WordTestBuilder.aWord().language(Language.ENGLISH).build();
+		Word word5 = WordTestBuilder.aWord().language(Language.ENGLISH).build();
+		Word word6 = WordTestBuilder.aWord().language(Language.TURKISH).build();
+
+		wordRepository.saveAndFlush(word1);
+		wordRepository.saveAndFlush(word2);
+		wordRepository.saveAndFlush(word3);
+		wordRepository.saveAndFlush(word4);
+		wordRepository.saveAndFlush(word5);
+		wordRepository.saveAndFlush(word6);
+		entityManager.flush();
+		entityManager.clear();
+
+		// Given: User has 2 sessions, each with 2 learned words (total 4 learned words)
+		com.github.muhsenerdev.commons.jpa.UserId userId = learner.getId();
+
+		// Session 1: User learned word1 and word2
+		Session session1 = SessionTestBuilder.aSession().withUserId(userId).withStatus(SessionStatus.INACTIVE).build();
+		SessionWord sessionWord1 = SessionWordTestBuilder.aSessionWord().withSessionId(session1.getId())
+				.withWordId(word1.getId()).withLearned(true).build();
+		SessionWord sessionWord2 = SessionWordTestBuilder.aSessionWord().withSessionId(session1.getId())
+				.withWordId(word2.getId()).withLearned(true).build();
+		session1.activate(Set.of(sessionWord1, sessionWord2));
+
+		// Session 2: User learned word3 and word4
+		Session session2 = SessionTestBuilder.aSession().withUserId(userId).withStatus(SessionStatus.INACTIVE).build();
+		SessionWord sessionWord3 = SessionWordTestBuilder.aSessionWord().withSessionId(session2.getId())
+				.withWordId(word3.getId()).withLearned(true).build();
+		SessionWord sessionWord4 = SessionWordTestBuilder.aSessionWord().withSessionId(session2.getId())
+				.withWordId(word4.getId()).withLearned(true).build();
+		session2.activate(Set.of(sessionWord3, sessionWord4));
+		// Persist sessions and session words
+
+		sessionRepository.saveAndFlush(session1);
+		sessionRepository.saveAndFlush(session2);
+
+		// When: Ask for 5 new words
+		java.util.Set<Word> newWords = wordRepository.findRandomNewWordsForUser2(userId, Language.ENGLISH, 5);
+
+		// Then: Should return only 1 word (word5), as the other 4 are already learned
+		assertThat(newWords).hasSize(1);
+		assertThat(newWords).extracting(Word::getId).containsExactly(word5.getId());
 	}
 
 }

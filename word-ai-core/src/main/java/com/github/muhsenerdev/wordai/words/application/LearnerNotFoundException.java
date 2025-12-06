@@ -8,12 +8,12 @@ public class LearnerNotFoundException extends ResourceNotFoundException
 
 {
 
-    public LearnerNotFoundException(UserId userId) {
-        this(userId, "learner.not-found");
-    }
+	public LearnerNotFoundException(UserId userId) {
+		this(userId, "learner.not-found");
+	}
 
-    public LearnerNotFoundException(UserId userId, String code) {
-        super("learner", "userId", Assert.notNull(userId, "userId"), code);
-    }
+	public LearnerNotFoundException(UserId userId, String code) {
+		super("learner", "userId", Assert.notNull(userId, "userId"), code);
+	}
 
 }

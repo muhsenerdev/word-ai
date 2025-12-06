@@ -1,6 +1,9 @@
 package com.github.muhsenerdev.commons.core;
 
 import java.util.Collection;
+import java.util.Set;
+
+import com.github.muhsenerdev.wordai.words.domain.SessionWord;
 
 public class DomainUtils {
 
@@ -55,6 +58,11 @@ public class DomainUtils {
         if (!value)
             throw new InvalidDomainObjectException(message, code);
 
+    }
+
+    public static <T> void hasSize(Collection<T> collection, int size, String message, String errorCode) {
+        if (collection == null || collection.size() != size)
+            throw new InvalidDomainObjectException(message, errorCode);
     }
 
 }

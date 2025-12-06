@@ -10,16 +10,16 @@ import com.github.muhsenerdev.wordai.words.domain.Learner;
 @Component
 public class LearnerMapper {
 
-    public LearnerCreationResponse toResponse(Learner learner) {
-        if (learner == null) {
-            return null;
-        }
-        return LearnerCreationResponse.builder()
-                .userId(learner.getUserId() != null ? learner.getUserId().getValue() : null).build();
-    }
+	public LearnerCreationResponse toResponse(Learner learner) {
+		if (learner == null) {
+			return null;
+		}
+		return LearnerCreationResponse.builder()
+				.userId(learner.getUserId() != null ? learner.getUserId().getValue() : null).build();
+	}
 
-    public UUID map(UserId value) {
-        return value != null ? value.getValue() : null;
-    }
+	public UUID map(UserId value) {
+		return value != null ? value.getValue() : null;
+	}
 
 }
