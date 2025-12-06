@@ -166,7 +166,7 @@ class WordRepositoryTest extends BasePersistenceIT {
 				.withWordId(word1.getId()).withLearned(true).build();
 		SessionWord sessionWord2 = SessionWordTestBuilder.aSessionWord().withSessionId(session1.getId())
 				.withWordId(word2.getId()).withLearned(true).build();
-		session1.activate(Set.of(sessionWord1, sessionWord2));
+		session1 = SessionTestBuilder.from(session1).withSessionWords(Set.of(sessionWord1, sessionWord2)).build();
 
 		// Session 2: User learned word3 and word4
 		Session session2 = SessionTestBuilder.aSession().withUserId(userId).withStatus(SessionStatus.INACTIVE).build();
@@ -174,7 +174,7 @@ class WordRepositoryTest extends BasePersistenceIT {
 				.withWordId(word3.getId()).withLearned(true).build();
 		SessionWord sessionWord4 = SessionWordTestBuilder.aSessionWord().withSessionId(session2.getId())
 				.withWordId(word4.getId()).withLearned(true).build();
-		session2.activate(Set.of(sessionWord3, sessionWord4));
+		session2 = SessionTestBuilder.from(session2).withSessionWords(Set.of(sessionWord3, sessionWord4)).build();
 		// Persist sessions and session words
 
 		sessionRepository.saveAndFlush(session1);
