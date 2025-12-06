@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.antlr.runtime.tree.TreeFilter.fptr;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -116,10 +115,8 @@ public class Session extends SoftDeletableEntity<SessionId> {
 		if (isCompleted())
 			throw new InvalidDomainObjectException("Session is completed.", "session.activate.completed");
 
-		// DomainUtils.hasSize(sessionWords, WORD_NUMBER, "To activate session,
-		// %d words
-		// is required.".formatted(WORD_NUMBER),
-		// "session.activate.word-number");
+		DomainUtils.hasSize(sessionWords, WORD_NUMBER,
+				"To activate session, %d words is required.".formatted(WORD_NUMBER), "session.activate.word-number");
 
 		this.status = SessionStatus.ACTIVE;
 		this.sessionWords = sessionWords;
