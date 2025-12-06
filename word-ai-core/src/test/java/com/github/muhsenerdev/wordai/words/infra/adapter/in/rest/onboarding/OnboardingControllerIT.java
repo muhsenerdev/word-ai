@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,8 @@ class OnboardingControllerIT extends WordsBaseIT {
 				.thenThrow(new DuplicateResourceException("user", "username", input.getUsername()));
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isConflict());
 
 	}
@@ -46,7 +46,8 @@ class OnboardingControllerIT extends WordsBaseIT {
 
 		// When & Then
 		MvcResult result = mockMvc
-				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isBadRequest()).andReturn();
 		;
 
@@ -66,7 +67,8 @@ class OnboardingControllerIT extends WordsBaseIT {
 
 		// When & Then
 		MvcResult result = mockMvc
-				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isBadRequest()).andReturn();
 
 		;
@@ -75,7 +77,4 @@ class OnboardingControllerIT extends WordsBaseIT {
 
 	}
 
-	private JsonNode extractNode(MvcResult result) throws IOException {
-		return objectMapper.readTree(result.getResponse().getContentAsByteArray());
-	}
 }

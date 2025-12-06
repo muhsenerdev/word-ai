@@ -44,7 +44,8 @@ class WordControllerIT extends WordsBaseIT {
 
 		// When & Then
 		MvcResult result = mockMvc
-				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+				.perform(post(PATH).contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.responses", hasSize(count))).andReturn();
 		;
 
@@ -66,7 +67,8 @@ class WordControllerIT extends WordsBaseIT {
 		BulkInsertWordInput input = WordTestData.bulkInsertWordInput(1);
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isUnauthorized());
 	}
 
@@ -77,7 +79,8 @@ class WordControllerIT extends WordsBaseIT {
 		BulkInsertWordInput input = WordTestData.bulkInsertWordInput(1);
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isForbidden());
 	}
 
@@ -85,14 +88,17 @@ class WordControllerIT extends WordsBaseIT {
 	@WithMockUser(roles = "ADMIN")
 	void should_return_400_when_input_is_invalid() throws Exception {
 		// Given
-		BulkInsertWordInput input = WordTestData.bulkInsertWordInput(1).toBuilder().words(java.util.Collections.emptyList()) // Invalid:
-																																																													// empty
-																																																													// list
+		BulkInsertWordInput input = WordTestData.bulkInsertWordInput(1).toBuilder()
+				.words(java.util.Collections.emptyList()) // Invalid:
+															// empty
+															// list
 				.build();
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
-				.andExpect(status().isBadRequest()).andExpect(jsonPath("$.errors['words.required']").value("words.required"));
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.errors['words.required']").value("words.required"));
 	}
 
 	@Test
@@ -103,7 +109,8 @@ class WordControllerIT extends WordsBaseIT {
 		var input = BulkInsertWordInput.builder().words(java.util.List.of(wordInput)).build();
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isBadRequest());
 	}
 
@@ -115,7 +122,8 @@ class WordControllerIT extends WordsBaseIT {
 		var input = BulkInsertWordInput.builder().words(java.util.List.of(wordInput)).build();
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isBadRequest());
 	}
 
@@ -127,7 +135,8 @@ class WordControllerIT extends WordsBaseIT {
 		var input = BulkInsertWordInput.builder().words(java.util.List.of(wordInput)).build();
 
 		// When & Then
-		mockMvc.perform(post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
+		mockMvc.perform(
+				post(PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(input)))
 				.andExpect(status().isBadRequest());
 	}
 }

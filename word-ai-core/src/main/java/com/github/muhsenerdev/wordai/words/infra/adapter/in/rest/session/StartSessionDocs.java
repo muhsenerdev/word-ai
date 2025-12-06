@@ -2,6 +2,7 @@ package com.github.muhsenerdev.wordai.words.infra.adapter.in.rest.session;
 
 import static com.github.muhsenerdev.wordai.words.infra.config.WordsOpenApiConfiguration.EXAMPLE_DAILY_LIMIT_REACHED;
 import static com.github.muhsenerdev.wordai.words.infra.config.WordsOpenApiConfiguration.EXAMPLE_LEARNER_NOT_FOUND;
+import static com.github.muhsenerdev.wordai.words.infra.config.WordsOpenApiConfiguration.EXAMPLE_ALREADY_ACTIVE_SESSION;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -36,8 +37,11 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 		""")
 @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Session started successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StartSessionOutput.class))),
-		@ApiResponse(responseCode = "400", description = "Bad Request - Daily session limit reached", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BadRequestResponse.class), examples = @ExampleObject(name = "Daily limit reached", ref = "#/components/examples/"
-				+ EXAMPLE_DAILY_LIMIT_REACHED))),
+		@ApiResponse(responseCode = "400", description = "Bad Request - Daily session limit reached", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BadRequestResponse.class), examples = {
+				@ExampleObject(name = "Daily limit reached", ref = "#/components/examples/"
+						+ EXAMPLE_DAILY_LIMIT_REACHED),
+				@ExampleObject(name = "Already active session", ref = "#/components/examples/"
+						+ EXAMPLE_ALREADY_ACTIVE_SESSION) })),
 		@ApiResponse(responseCode = "401", description = "Unauthorized - User not authenticated", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UnauthorizedResponse.class), examples = @ExampleObject(name = "Unauthorized", ref = "#/components/examples/Unauthorized"))),
 		@ApiResponse(responseCode = "404", description = "Not Found - Learner not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class), examples = @ExampleObject(name = "Learner not found", ref = "#/components/examples/"
 				+ EXAMPLE_LEARNER_NOT_FOUND))),

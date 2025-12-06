@@ -15,6 +15,7 @@ public class WordsOpenApiConfiguration {
 	public static final String EXAMPLE_WORDS_REQUIRED = "WordsRequired";
 	public static final String EXAMPLE_DAILY_LIMIT_REACHED = "DailyLimitReached";
 	public static final String EXAMPLE_LEARNER_NOT_FOUND = "LearnerNotFound";
+	public static final String EXAMPLE_ALREADY_ACTIVE_SESSION = "AlreadyActiveSession";
 
 	@Bean
 	public OpenApiCustomizer wordsOpenApiCustomizer() {
@@ -102,6 +103,20 @@ public class WordsOpenApiConfiguration {
 							        "session.start.daily-limit-reached": "User 123e4567-e89b-12d3-a456-426614174000 has reached daily session limit."
 							    },
 							    "message": "User 123e4567-e89b-12d3-a456-426614174000 has reached daily session limit."
+							}
+							"""));
+
+			openApi.getComponents().addExamples(EXAMPLE_ALREADY_ACTIVE_SESSION, new Example()
+					.summary("Already active session")
+					.value("""
+							{
+							    "status": 400,
+							    "path": "/api/v1/sessions/start",
+							    "timestamp": "2025-12-06T14:30:31.822652Z",
+							    "errors": {
+							        "session.start.already-active": "User 123e4567-e89b-12d3-a456-426614174000 has an active session for today."
+							    },
+							    "message": "User 123e4567-e89b-12d3-a456-426614174000 has an active session for today."
 							}
 							"""));
 

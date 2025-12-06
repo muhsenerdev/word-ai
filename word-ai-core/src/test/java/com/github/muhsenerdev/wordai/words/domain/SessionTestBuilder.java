@@ -32,7 +32,7 @@ public class SessionTestBuilder {
 
 	public static SessionTestBuilder from(Session session) {
 		return aSession().withId(session.getId()).withUserId(session.getUserId()).withDate(session.getDate())
-				.withStatus(session.getStatus());
+				.withSessionWords(session.getSessionWords()).withStatus(session.getStatus());
 	}
 
 	public SessionTestBuilder withId(SessionId id) {

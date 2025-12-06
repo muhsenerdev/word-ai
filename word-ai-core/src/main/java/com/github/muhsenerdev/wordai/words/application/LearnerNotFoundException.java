@@ -7,9 +7,10 @@ import com.github.muhsenerdev.commons.jpa.UserId;
 public class LearnerNotFoundException extends ResourceNotFoundException
 
 {
+	public static final String NOT_FOUND_CODE = "learner.not-found";
 
 	public LearnerNotFoundException(UserId userId) {
-		this(userId, "learner.not-found");
+		this(userId, NOT_FOUND_CODE);
 	}
 
 	public LearnerNotFoundException(UserId userId, String code) {

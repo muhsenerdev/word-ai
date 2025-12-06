@@ -17,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SessionDomainService {
 
+	public static final int DAILY_QUOTA = 1;
+
+	public static final String SESSION_ALREADY_ACTIVE_CODE = "session.start.already-active";
+	public static final String SESSION_DAILY_QUOTA_CODE = "session.start.daily-limit-reached";
+
 	private final SessionRepository sessionRepository;
 
 	public Session startSession(Set<Word> words, UserId userId)
@@ -49,11 +54,25 @@ public class SessionDomainService {
 	}
 
 	public void validateSessionStart(UserId userId) throws IllegalArgumentException {
-		Assert.notNull(userId, "UserId cannot be null");
+		Assert.notNull(userId, "UserId cannot be null in validateSessionStart()");
+		ensureNoActiveSessionExists(userId);
+		ensureHasQuota(userId);
+
+	}
+
+	private void ensureHasQuota(UserId userId) {
 		int count = sessionRepository.countByUserIdAndDate(userId, LocalDate.now());
-		if (count > 0)
-			throw new SessionDomainException("User %s has reached daily session limit.".formatted(userId),
+		if (count >= DAILY_QUOTA)
+			throw new SessionDomainException(
+					"User %s has reached daily session limit: %s".formatted(userId, DAILY_QUOTA),
 					"session.start.daily-limit-reached");
+	}
+
+	private void ensureNoActiveSessionExists(UserId userId) {
+		if (sessionRepository.existsByUserIdAndDateAndStatus(userId, LocalDate.now(), SessionStatus.ACTIVE)) {
+			throw new SessionDomainException("User %s has an active session for today.".formatted(userId),
+					"session.start.already-active");
+		}
 	}
 
 }

@@ -23,4 +23,6 @@ public interface SessionRepository extends JpaRepository<Session, SessionId> {
 
 	int countByUserIdAndDate(UserId userId, LocalDate now);
 
+	boolean existsByUserIdAndDateAndStatus(UserId userId, LocalDate now, SessionStatus active);
+
 }
