@@ -6,4 +6,6 @@
     <include file="changes/001-init-learners.xml" relativeToChangelogFile="true" />
     <include file="changes/002-init-words.xml" relativeToChangelogFile="true" />
     <include file="changes/003-init-cards.xml" relativeToChangelogFile="true" />
+    <include file="changes/004-init-sessions.xml" relativeToChangelogFile="true" />
+    <include file="changes/005-init-session-words.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
